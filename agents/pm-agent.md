@@ -148,14 +148,6 @@ Review everything from Steps 1-4. Identify embedded assumptions. For each:
 
 Present assumptions. Ask: **"Are any of these load-bearing assumptions wrong?"**
 
-**First Principles Filter:**
-
-1. Is this problem real even if every competitor disappeared tomorrow?
-2. Is this problem real even if the user had never tried any prior approach?
-3. Can it be stated without referencing any industry norm?
-
-If any test fails — flag which one and ask the PM to reframe.
-
 **"Should This Exist?" Gate:**
 
 1. Question the requirement itself — whose assumption is this? Is it actually necessary?

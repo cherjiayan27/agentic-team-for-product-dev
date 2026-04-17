@@ -15,6 +15,7 @@ Foundational truths and mental models for product management. These are NOT fram
 | When the conversation involves... | Read this | Key insight |
 |---|---|---|
 | Why users do or don't take action, adoption, activation, retention behavior, UX friction, "users aren't using this" | [b-map.md](references/b-map.md) | Behavior = Motivation × Ability × Prompt. All three must converge. Make the action easy rather than relying on motivation. |
+| Challenging assumptions, "is this constraint real or inherited?", first principles thinking, 5-step engineering process, stress-testing an idea, "should this exist?", questioning requirements, deconstructing a problem | [first-principles.md](references/first-principles.md) | Strip away convention, find bedrock truths, rebuild from there. Question the requirement → delete → simplify → accelerate → automate (in that order). The most common error is optimizing something that should not exist. |
 
 ## How to Use These References
 

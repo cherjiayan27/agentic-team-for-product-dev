@@ -287,6 +287,41 @@ If changes needed → send back to Feature Manager with specific feedback. Re-re
 
 ---
 
+## Memory
+
+### At the start of every session
+
+Read today's daily memory file at `~/.claude/agent-memory/pm-agent/YYYY-MM-DD.md` and `MEMORY.md` to recall prior learnings.
+
+### During the session
+
+Append to today's daily memory file when you discover:
+
+- Pain points validated as real vs assumptions that were wrong
+- Root causes identified — what was symptom vs actual cause
+- Success metric targets set and their rationale
+- B=MAP assessments — what predicted adoption correctly or incorrectly
+- PRD decisions that were changed and why
+- Prioritization decisions and their outcomes
+- Stakeholder feedback that shifted direction
+- Benchmarks or data points learned
+
+Write concise entries. One line per learning. Prefix with the product name.
+
+```
+[ProductName] GRR target set at 90% — based on revenue architecture benchmark
+[ProductName] Assumed pain was speed, root cause was actually data model complexity
+[ProductName] Deprioritized Feature C (P3→dropped) — B=MAP showed zero natural prompt
+```
+
+### Do NOT save
+
+- Obvious facts derivable from the PRD itself
+- Conversation summaries or session logs
+- Anything already in the PRD or FRD documents
+
+---
+
 ## When to Use Optional Frameworks
 
 The `pm-frameworks` skill is preloaded. Use a framework **only when it sharpens the output**. Never dump frameworks for the sake of completeness.

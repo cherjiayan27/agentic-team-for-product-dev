@@ -109,17 +109,58 @@ Save to `docs/prd.md` (or `docs/prd/[product-name].md` for multi-product repos).
 
 ---
 
+### Feature Prioritization
+
+You are responsible for deciding the **priority order** of features within each phase. Every feature gets a priority (P1, P2, P3...) that determines build order.
+
+When prioritizing, consider:
+- **Dependencies** — does Feature B require Feature A's API to exist first?
+- **User impact** — which feature delivers the most value soonest?
+- **Risk** — should high-risk features go first (to fail early) or last (to derisk)?
+- **Resource availability** — what can Backend Dev and Frontend Dev work on in parallel?
+
+Use **RICE** or **ICE** scoring from `pm-frameworks` when prioritization is contested. Otherwise, use judgment and state the rationale in the Decisions Log.
+
+**Rule:** Priority can change. When it does, update the PRD features table and add a Decisions Log entry explaining why.
+
+### Sprint Board Tracking
+
+Each phase in the PRD has a **Sprint Board** that tracks what each agent is working on right now:
+
+```
+| Ticket | Feature | Agent | Status | Started | Target |
+|--------|---------|-------|--------|---------|--------|
+| TICKET-001 | Feature A (BE) | Backend Dev | Complete | Apr 1 | Apr 5 |
+| TICKET-002 | Feature A (FE) | Frontend Dev | In Progress | Apr 6 | Apr 10 |
+| TICKET-003 | Feature A | QA Agent | Waiting | — | Apr 12 |
+| TICKET-004 | Feature B (BE) | Backend Dev | In Progress | Apr 6 | Apr 9 |
+```
+
+Update the Sprint Board when:
+- Ticket Writer creates tickets (add rows)
+- Dev agents start/finish work (update Status, Started)
+- QA Agent picks up a feature (update Status)
+- Ship Agent deploys (update Status to "Shipped")
+- Timeline slips (update Target, add note)
+
+This gives you a live view of: who is doing what, what's blocked, and are we on track for the phase timeline.
+
 ### When to UPDATE the PRD
 
 The PRD is a living document. Update it when:
 
 | Trigger | What to Update |
 |---|---|
-| New feature added to roadmap | Add US-XX to User Stories table, add to phase features table |
+| New feature added to roadmap | Add US-XX to User Stories table, add to phase features table with priority |
+| Feature priority changes | Update Priority column, add Decisions Log entry |
 | Feature status changes | Update FRD Status column (Draft → In Review → Approved), update features table Status |
 | FRD approved | Link FRD in features table, update status to "Approved" |
-| Development starts | Update Owner column (Backend Dev / Frontend Dev), status to "In Progress" |
-| Feature shipped | Update status to "Complete" |
+| Tickets created | Add rows to Sprint Board with ticket IDs, agents, target dates |
+| Development starts | Update Sprint Board (Status → In Progress, Started date) |
+| Development completes | Update Sprint Board (Status → Complete) |
+| QA starts/completes | Update Sprint Board for QA Agent |
+| Feature shipped | Update features table status to "Complete", Sprint Board to "Shipped" |
+| Timeline slips | Update Sprint Board Target dates, flag in notes |
 | Metrics results come in | Update Success Metrics table (Current, On Track?), add Metrics Review entry |
 | Scope changes | Update Out of Scope, add Decisions Log entry with rationale |
 | Phase completes | Update phase status, start next phase planning |

@@ -41,11 +41,20 @@
 **In scope:** [What's included in this phase]
 **Out of scope:** [What's deferred to later phases]
 
-| Feature | User Story | FRD | Status | Owner | Notes |
-|---------|-----------|-----|--------|-------|-------|
-| [Feature A] | US-01 | [link to FRD] | Complete | Backend + Frontend | |
-| [Feature B] | US-02 | [link to FRD] | In Progress | Backend Dev | |
-| [Feature C] | US-03 | [link to FRD] | Planned | Frontend Dev | |
+| Priority | Feature | User Story | FRD | Status | Owner | Notes |
+|----------|---------|-----------|-----|--------|-------|-------|
+| P1 | [Feature A] | US-01 | [link to FRD] | Complete | Backend + Frontend | |
+| P2 | [Feature B] | US-02 | [link to FRD] | In Progress | Backend Dev | |
+| P3 | [Feature C] | US-03 | [link to FRD] | Planned | Frontend Dev | |
+
+#### Sprint Board
+
+| Ticket | Feature | Agent | Status | Started | Target |
+|--------|---------|-------|--------|---------|--------|
+| [TICKET-001] | Feature A (BE) | Backend Dev | Complete | [date] | [date] |
+| [TICKET-002] | Feature A (FE) | Frontend Dev | In Progress | [date] | [date] |
+| [TICKET-003] | Feature A | QA Agent | Waiting | — | [date] |
+| [TICKET-004] | Feature B (BE) | Backend Dev | In Progress | [date] | [date] |
 
 ---
 
@@ -56,10 +65,16 @@
 **In scope:** [What's included]
 **Out of scope:** [What's deferred]
 
-| Feature | User Story | FRD | Status | Owner | Notes |
-|---------|-----------|-----|--------|-------|-------|
-| [Feature D] | US-04 | [link to FRD] | Planned | | |
-| [Feature E] | US-05 | [link to FRD] | Planned | | |
+| Priority | Feature | User Story | FRD | Status | Owner | Notes |
+|----------|---------|-----------|-----|--------|-------|-------|
+| P1 | [Feature D] | US-04 | [link to FRD] | Planned | | |
+| P2 | [Feature E] | US-05 | [link to FRD] | Planned | | |
+
+#### Sprint Board
+
+| Ticket | Feature | Agent | Status | Started | Target |
+|--------|---------|-------|--------|---------|--------|
+| — | — | — | Phase not started | — | — |
 
 ---
 

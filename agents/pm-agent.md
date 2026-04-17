@@ -10,6 +10,11 @@ skills:
   - pm-frameworks
   - pm-domain-knowledge
 hooks:
+  SessionStart:
+    - matcher: "startup"
+      hooks:
+        - type: command
+          command: "mkdir -p ~/.claude/agent-memory/pm-agent && test -f ~/.claude/agent-memory/pm-agent/$(date +%Y-%m-%d).md || echo '# PM Agent Memory — '$(date +%Y-%m-%d) > ~/.claude/agent-memory/pm-agent/$(date +%Y-%m-%d).md"
   Stop:
     - matcher: ""
       hooks:

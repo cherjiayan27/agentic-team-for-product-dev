@@ -6,6 +6,12 @@ model: opus
 skills:
   - pm-frameworks
   - pm-domain-knowledge
+hooks:
+  Stop:
+    - matcher: ""
+      hooks:
+        - type: prompt
+          prompt: "Has the PRD been saved or updated during this session? Check if Write or Edit was used on a PRD file (docs/prd.md or docs/prd/*.md). If the PM agent created or modified PRD content but did not save it to a file, block the stop and remind: 'The PRD has not been saved. Save it before ending the session.'"
 ---
 
 # PM Agent — Product Manager

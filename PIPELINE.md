@@ -438,14 +438,75 @@ The technology-specific knowledge lives in the **project's own skills** (e.g., a
 
 ## Skills
 
-Skills are reusable knowledge packages that agents preload or that you invoke directly.
+Skills are reusable knowledge packages that agents preload.
 
 | Skill | Type | Used By | Purpose |
 |---|---|---|---|
-| **pm-frameworks** | Agent-only (preloaded) | PM Agent, Feature Manager | Optional PM frameworks (RICE, JTBD, MoSCoW, Kano, HEART, ICE, North Star, OST, Competitive Teardown, OKR) — applied only when they sharpen the output |
-| **elon-musk-advisor** | Standalone (user-invoked) | You | First-principles advisor persona for stress-testing any idea, process, or decision on demand |
+| **pm-frameworks** | Agent-only (preloaded) | PM Agent | Optional PM frameworks (RICE, JTBD, MoSCoW, Kano, HEART, ICE, North Star, OST, Competitive Teardown, OKR) — applied only when they sharpen the output |
+| **pm-domain-knowledge** | Agent-only (preloaded) | PM Agent | Deep domain knowledge applied contextually across all steps — B=MAP (behavioral science), first-principles thinking, and more as added |
 
-The PM Agent has first-principles thinking **built into its base framework** (assumption surfacing, 3 truth tests, "Should this exist?" gate). The `elon-musk-advisor` skill is for ad-hoc use when you want the full Elon persona on any topic outside the pipeline.
+Domain knowledge is **not step-specific** — the PM agent pulls in references whenever the conversation context matches, across any of the 4 BASE steps.
+
+---
+
+## PM Agent Memory System
+
+The PM agent maintains a **daily memory** with automatic summarization and a rolling 7-day window.
+
+```
+Session starts
+    │
+    ▼  SessionStart hook (automatic)
+    Creates ~/.claude/agent-memory/pm-agent/2026-04-17.md
+    (only if doesn't exist — multiple sessions share same file)
+    │
+    ▼  Agent reads MEMORY.md (auto) + today's file
+    │
+    ▼  During session
+    Agent appends learnings to today's file:
+    [ProductName] GRR target set at 90% — revenue architecture benchmark
+    [ProductName] Root cause was data model, not speed
+    │
+    ▼  Session ends
+    Stop hook enforces PRD save
+    │
+    ▼  End of day (11:59pm — scheduled routine)
+    scripts/pm-memory-summarize.sh runs:
+      → Appends today's entries to MEMORY.md
+      → Deletes daily files older than 7 days
+      → Trims MEMORY.md to 200 lines (auto-load limit)
+```
+
+### Memory file structure
+
+```
+~/.claude/agent-memory/pm-agent/
+  MEMORY.md          ← index, auto-loaded at startup (200 lines max)
+  2026-04-17.md      ← today's learnings
+  2026-04-16.md      ← yesterday
+  2026-04-15.md      ← ...rolling 7 days
+```
+
+### What gets saved
+
+- Pain points validated as real vs assumptions that were wrong
+- Root causes identified — symptom vs actual cause
+- Success metric targets and rationale
+- B=MAP assessments — what predicted adoption correctly or not
+- PRD decisions that changed and why
+- Prioritization decisions and outcomes
+
+### What does NOT get saved
+
+- Facts derivable from the PRD itself
+- Conversation summaries or session logs
+- Anything already in the PRD or FRD documents
+
+### To activate the daily schedule
+
+```
+/schedule daily at 11:59pm run ~/agentic-team-for-product-dev/scripts/pm-memory-summarize.sh
+```
 
 ---
 

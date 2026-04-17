@@ -17,36 +17,34 @@ User idea
 │  Challenges assumptions before building.             │
 │  Preloads: pm-frameworks skill                       │
 │                                                      │
-│  Phase 1: Problem Validation                         │
-│    → 5 forcing questions (one at a time)             │
-│    → Surface assumptions (convention/imitation/      │
-│      precedent/fear/unexamined default)              │
-│    → "Should this exist?" gate                       │
+│  Job 1: PRD Author (product-level)                   │
+│    → Creates and maintains the PRD                   │
+│    → Problem validation (5 forcing questions)        │
+│    → Surface assumptions + "Should this exist?" gate │
 │    → First principles filter (3 truth tests)         │
-│    → Push back on vague answers                      │
-│    → Output: validated problem statement              │
-│                                                      │
-│  Phase 2: Strategic Alignment                        │
-│    → Primary job, out of scope, success metrics      │
-│    → Testable hypothesis                             │
+│    → Strategic alignment (job, scope, metrics)       │
 │    → 2-3 solution approaches (speed/impact/simplify) │
-│    → Output: scope block + chosen approach           │
+│    → Product roadmap (phases, timelines, features)   │
+│    → User stories (Given-When-Then, MoSCoW, INVEST)  │
+│    → Updates PRD throughout lifecycle                 │
+│      (status changes, metrics, learnings, scope)     │
+│    → Output: PRD with user stories                   │
 │                                                      │
-│  Phase 3: User Stories                               │
-│    → Given-When-Then format (US-XX)                  │
-│    → MoSCoW priority per story                       │
-│    → INVEST quality check                            │
-│    → Output: Sections 1-4 of the spec                │
+│  Job 2: FRD Reviewer (feature-level)                 │
+│    → Reviews FRDs written by Feature Manager         │
+│    → Checks intent match per US-XX                   │
+│    → Approves or sends back with feedback            │
+│    → Updates PRD status after approval               │
 │                                                      │
-│  Hands over: Problem Statement, Strategic Alignment, │
-│              Out of Scope, User Stories               │
+│  Hands over: each US-XX to Feature Manager for FRD   │
 └──────────────────────────────────────────────────────┘
     │
     ▼
 ┌──────────────────────────────────────────────────────┐
 │  2. FEATURE MANAGER                                  │
 │                                                      │
-│  For EACH User Story (US-XX):                        │
+│  Writes one FRD per User Story (US-XX):              │
+│  Template: templates/frd-template.md                 │
 │                                                      │
 │    Functional Requirements (FR-XX)                   │
 │      → "The system shall..." language                │
@@ -70,28 +68,28 @@ User idea
 │    Decisions Log                                     │
 │      → Decision, choice, alternatives, rationale     │
 │                                                      │
-│  Output: Sections 5-9 per US-XX                      │
-│  Hands back: full spec to PM Agent for review        │
+│  Output: FRD per US-XX                               │
+│  Hands back: FRD to PM Agent for review              │
 └──────────────────────────────────────────────────────┘
     │
     ▼
 ┌──────────────────────────────────────────────────────┐
-│  3. PM AGENT (as Spec Reviewer)                      │
+│  3. PM AGENT (as FRD Reviewer)                       │
 │                                                      │
-│  Reviews the full spec PER USER STORY:               │
+│  Reviews each FRD against its parent US-XX:          │
 │                                                      │
-│    US-01 → Does it match my intent?                  │
-│      → Approved ✓                                    │
-│    US-02 → FR-05 doesn't match what I meant          │
+│    FRD for US-01 → Does it match my intent?          │
+│      → Approved ✓ → PRD updated                     │
+│    FRD for US-02 → FR-05 doesn't match intent        │
 │      → Needs Changes ✗ → back to Feature Manager     │
 │      → Feature Manager revises → PM re-reviews       │
-│      → Approved ✓                                    │
-│    US-03 → Approved ✓                                │
+│      → Approved ✓ → PRD updated                     │
+│    FRD for US-03 → Approved ✓ → PRD updated         │
 │                                                      │
-│  Gate: ALL user stories must be approved              │
-│  Output: approved behavioral specification            │
+│  Gate: ALL FRDs for current phase must be approved    │
+│  After approval: PRD status updated, FRDs linked     │
 │                                                      │
-│  HARD GATE: No implementation before spec approval.  │
+│  HARD GATE: No implementation before FRD approval.   │
 └──────────────────────────────────────────────────────┘
     │
     ▼
@@ -205,9 +203,10 @@ User idea
 ┌──────────────────────────────────────────────────────┐
 │  BUG FOUND?                                          │
 │                                                      │
-│  Trace bug → FR/EC ID → fix the spec first           │
-│  → Feature Manager updates FR/NFR/EC                 │
-│  → PM Agent re-approves                              │
+│  Trace bug → FR/EC ID → fix the FRD first            │
+│  → Feature Manager updates FR/NFR/EC in FRD          │
+│  → PM Agent re-reviews FRD                           │
+│  → PM Agent updates PRD if needed                    │
 │  → Dev agent fixes code                              │
 │  → QA Agent re-reviews                               │
 │  → Ship Agent pushes the fix                         │
@@ -222,8 +221,8 @@ User idea
 
 | # | Agent | Role | Core Expertise (product-agnostic) |
 |---|---|---|---|
-| 1 | **PM Agent** | Problem owner. Validates the problem, defines strategy, writes user stories, reviews the final spec. | Problem validation, strategic alignment, user story writing (Given-When-Then), spec review, anti-sycophancy |
-| 2 | **Feature Manager** | Solutions architect. Translates user stories into formal system requirements per story. Explores codebase for feasibility. | SDD spec formalism (FR/NFR/EC), system architecture, API design, data modeling, codebase analysis |
+| 1 | **PM Agent** | PRD owner. Creates and maintains the PRD (problem, strategy, metrics, roadmap, user stories). Reviews FRDs written by Feature Manager. Updates PRD throughout lifecycle. | PRD authoring, problem validation, strategic alignment, user story writing, FRD review, first-principles rigor, anti-sycophancy |
+| 2 | **Feature Manager** | Solutions architect. Writes one FRD per user story (FR/NFR/EC). Explores codebase for feasibility. | SDD spec formalism (FR/NFR/EC), system architecture, API design, data modeling, codebase analysis |
 | 3 | **Ticket Writer** | Ticket factory. Decomposes approved spec into tickets on any platform (Linear, Jira, GitHub Issues, etc.) with proper format and blocking relationships. | Ticket decomposition, acceptance criteria mapping, sub-issue structure, blocking relationships |
 | 4 | **Backend Dev** | Backend engineer. Implements APIs, services, data models, migrations, and unit tests in whatever backend stack the project uses. | Backend architecture, API design, database operations, unit testing, migrations — framework detected from codebase |
 | 5 | **Frontend Dev** | Frontend engineer. Implements UI components, state management, API integration, and E2E tests in whatever frontend stack the project uses. | Component architecture, state management, responsive design, E2E testing — framework detected from codebase |
@@ -238,35 +237,35 @@ Each handover between agents follows a strict contract.
 
 ### PM Agent → Feature Manager
 
-The PM Agent delivers **Sections 1-4** of the spec:
+The PM Agent delivers the **PRD** containing user stories. For each US-XX in the current phase, the Feature Manager writes an **FRD** using `templates/frd-template.md`.
 
-```
-1. Problem Statement (validated — who, what, evidence, urgency)
-2. Strategic Alignment (primary job, hypothesis, metrics)
-3. Out of Scope (bulleted list with reasons)
-4. User Stories (US-XX table with Given-When-Then and MoSCoW priority)
-```
+The Feature Manager receives the user story and writes:
+- Functional Requirements (FR-XX)
+- Non-Functional Requirements (NFR-XX)
+- Edge Cases (EC-XX)
+- Codebase Feasibility
+- Decisions Log
 
-The Feature Manager receives this and writes **Sections 5-9 per User Story**.
+### Feature Manager → PM Agent (FRD Review)
 
-### Feature Manager → PM Agent (Spec Review)
+The Feature Manager delivers each **FRD** back to the PM Agent.
 
-The Feature Manager delivers the **full spec** (Sections 1-9) back to the PM Agent.
-
-The PM Agent reviews **per User Story**:
-- Do the FRs match the intent of the user story?
+The PM Agent reviews each FRD against its parent US-XX in the PRD:
+- Does the FRD match the intent of the user story?
 - Are the edge cases realistic?
 - Are the NFRs appropriate?
 - Does the feasibility assessment change priorities?
 
-Verdict per story: **Approved** or **Needs Changes** (with specific feedback).
+Verdict: **Approved** or **Needs Changes** (with specific feedback).
+
+After approval: PM Agent updates the PRD (FRD status, links).
 
 ### PM Agent → Ticket Writer
 
-The PM Agent delivers the **approved spec** (all stories approved).
+The PM Agent delivers the **approved FRD** for a user story.
 
 The Ticket Writer detects the project's ticket platform and creates:
-- One parent issue per US-XX (user story + context + acceptance criteria)
+- One parent issue per US-XX (user story + context + acceptance criteria from FRD)
 - Backend sub-issue with FR-XX steps and EC-XX test cases
 - Frontend sub-issue with FR-XX steps and EC-XX test cases
 - Backend blocks Frontend
@@ -306,106 +305,38 @@ Once QA passes:
 
 ---
 
-## Spec Document Structure
+## Document Structure
 
-The behavioral specification follows this structure. Sections 1-4 are written by the PM Agent. Sections 5-9 are written by the Feature Manager, grouped per User Story.
+Two documents at two levels:
 
-```markdown
-# [Feature Name] — Behavioral Specification
+### PRD (Product Requirements Document) — product-level
 
-**Status:** Draft | Approved
-**Author:** [PM name]
-**Date:** [date]
-**Version:** 1.0
+**Owner:** PM Agent
+**Template:** `templates/prd-template.md`
+**Lives at:** `docs/prd.md`
+**Updated:** Throughout the product lifecycle (living document)
 
----
+Contains: overarching problem statement, strategic alignment, success metrics (with on-track tracking), product roadmap by phase, user stories table, decisions log, metrics review.
 
-## 1. Problem Statement
+### FRD (Feature Requirements Document) — one per user story
 
-[Who has the problem, what the problem is, current workaround, evidence, urgency]
+**Owner:** Feature Manager (writes it), PM Agent (reviews it)
+**Template:** `templates/frd-template.md`
+**Lives at:** `docs/frd/[US-XX]-[feature-name].md`
+**Updated:** Until approved, then frozen (changes require new FRD version)
 
-## 2. Strategic Alignment
+Contains: reference to parent PRD + US-XX, functional requirements (FR-XX), non-functional requirements (NFR-XX), edge cases (EC-XX), codebase feasibility, decisions log, approval status.
 
-**Primary job:** [one sentence]
-**Hypothesis:** We believe [action] will [outcome] for [persona], measured by [metric].
-**Success metric:** [primary metric + target]
-**Guardrail metric:** [guardrail metric + threshold]
+### How They Relate
 
-## 3. Out of Scope
-
-- [Item 1] — [reason]
-- [Item 2] — [reason]
-
-## 4. User Stories
-
-| ID | Story | Priority |
-|----|-------|----------|
-| US-01 | Given [precondition], When [action], Then [outcome] | Must |
-| US-02 | Given [precondition], When [action], Then [outcome] | Must |
-| US-03 | Given [precondition], When [action], Then [outcome] | Should |
-
----
-
-## US-01: [Story Title]
-
-### Functional Requirements
-
-| ID | Requirement | Story | Priority |
-|----|-------------|-------|----------|
-| FR-01 | The system shall [behavior]. | US-01 | Must |
-| FR-02 | The system shall [behavior]. | US-01 | Must |
-
-### Non-Functional Requirements
-
-| ID | Requirement | Category |
-|----|-------------|----------|
-| NFR-01 | [constraint] | performance |
-
-### Edge Cases
-
-| ID | Condition | Behavior | Traces to |
-|----|-----------|----------|-----------|
-| EC-01 | When [edge condition] | The system shall [behavior] | FR-01 |
-| EC-02 | When [edge condition] | The system shall [behavior] | FR-02 |
-
-### Codebase Feasibility
-
-**Reuse:** [existing modules/patterns]
-**New work:** [new modules/entities/endpoints needed]
-**Risks:** [architectural conflicts]
-
-### Decisions Log
-
-| Decision | Choice | Alternatives Considered | Rationale |
-|----------|--------|------------------------|-----------|
-
----
-
-## US-02: [Story Title]
-
-### Functional Requirements
-...
-
-### Non-Functional Requirements
-...
-
-### Edge Cases
-...
-
-### Codebase Feasibility
-...
-
-### Decisions Log
-...
-
----
-
-## 10. Approval
-
-- [ ] US-01 — PM approved
-- [ ] US-02 — PM approved
-- [ ] US-03 — PM approved
-- [ ] Spec saved to docs/specs/
+```
+PRD (one per product)
+  → Problem, Strategy, Metrics, Roadmap
+  → User Stories (US-01, US-02, US-03...)
+      │
+      ├── FRD for US-01 (FR-01, FR-02, EC-01, EC-02...)
+      ├── FRD for US-02 (FR-03, FR-04, EC-03...)
+      └── FRD for US-03 (FR-05, EC-04, EC-05...)
 ```
 
 ---

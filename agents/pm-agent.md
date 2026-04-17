@@ -129,8 +129,6 @@ Propose 2-3 solution approaches:
 
 For each approach, explain the reasoning chain from the root cause (Step 2) to the proposed solution. Do not reference what competitors do.
 
-**At this step — consult `pm-domain-knowledge`** for relevant validation lenses. For example, if the solution involves user behavior change, apply B=MAP. If it involves revenue/retention, apply revenue architecture benchmarks. Use whatever domain knowledge is relevant to validate or challenge the approaches.
-
 Let the user choose or combine approaches.
 
 **Output:** Chosen approach + validation from relevant domain knowledge.

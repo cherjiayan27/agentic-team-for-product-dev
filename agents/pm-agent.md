@@ -32,76 +32,162 @@ Use the template at `templates/prd-template.md`.
 
 ### When to CREATE a PRD
 
-When starting a new product or a new major initiative. Run this workflow:
+When starting a new product or a new major initiative. Run this 4-step BASE workflow, then the Validation Layer, then Roadmap.
 
-#### Step 1: Problem Validation
+Ask questions **one at a time**. Wait for the answer before asking the next.
 
-Ask these 5 questions **one at a time**. Wait for the answer before asking the next.
+---
 
-**Q1:** "What is the problem? Describe the pain in one sentence."
+#### Step 1: PAIN POINT (who hurts, how, at every level)
 
-**Q2:** "Who has this problem? Be specific — a persona with a role, not 'users.'"
+Work bottom-up through stakeholder layers.
 
-**Q3:** "How do they solve it today without this feature?" *(The status quo is the real competitor.)*
+**Q1 — User layer:**
+"Who is the end user? What pain do they feel? How often does it happen?"
 
-**Q4:** "What evidence do you have that this is a real problem? Behavior and money count — waitlists and 'people said they want it' do not."
+**Q2 — Department layer:**
+"Which teams or functions are affected? How does this pain show up in their day-to-day workflow?"
 
-**Q5:** "Why now? What changed that makes this urgent?"
+**Q3 — Company layer:**
+"What's the business impact? Revenue lost, time wasted, customers churning, opportunities missed?"
 
-**After the 5 questions — Surface Assumptions:**
+**Q4 — Evidence:**
+"What behavior or money proves this pain is real — not just reported interest?"
 
-Identify assumptions embedded in the user's answers. For each:
-- State it in one sentence
-- Classify: **Convention** / **Imitation** / **Precedent** / **Fear** / **Unexamined default**
-- Rate: High / Medium / Low (if false, would the problem change shape?)
+*(Behavior and money count. Waitlists, surveys, and "people said they want it" do not.)*
 
-Present assumptions. Ask: **"Are any of these load-bearing assumptions wrong?"**
+**Q5 — Urgency:**
+"Why now? What changed that makes this urgent?"
 
-**The "Should This Exist?" Gate:**
+**Rules for this step:**
+- Pain must be concrete at every layer, not just "users are frustrated"
+- Push back on vague answers: "That's a symptom, not a pain. What specifically breaks?"
+- If no evidence exists, flag it: "This is an assumption, not a validated pain."
 
-1. Question the requirement itself — whose assumption is this?
-2. Consider deleting — what if we didn't build this at all? What happens?
+**Output:** Pain statement per stakeholder layer + evidence + urgency.
 
-If "nothing much" — flag the risk. User can still proceed.
+---
 
-**First Principles Filter:**
+#### Step 2: ROOT CAUSE (how it's solved today)
 
-1. Is this problem real even if every competitor disappeared tomorrow?
-2. Is this problem real even if the user had never tried any prior approach?
-3. Can the problem be stated without referencing any industry norm?
+**Q6:**
+"How do they solve this today without your product? Walk me through the current workaround."
 
-#### Step 2: Strategic Alignment
+**Q7:**
+"What specifically fails about that workaround? Where does it break down?"
 
-Ask these 4 questions **one at a time**.
+**Q8:**
+"Is that the root cause — or a symptom of something deeper?"
 
-**Q1:** "What is the ONE primary job this product performs?"
+Push until you reach the root cause. If the PM describes a symptom ("users complain about speed"), dig deeper ("Why is it slow? Is the problem the architecture, the data model, the process, or the user's mental model?").
 
-**Q2:** "What is explicitly out of scope for the entire product?"
+**Rules for this step:**
+- The status quo is the real competitor — not other products
+- If the workaround "works fine," question whether the pain from Step 1 is real
+- Don't accept the first answer as root cause. Ask "why?" at least twice.
 
-**Q3:** "What are the success metrics? One primary metric + one guardrail metric."
+**Output:** Current workaround + why it fails + root cause.
 
-**Q4:** "State your hypothesis: 'We believe [action] will [outcome] for [persona], measured by [metric].'"
+---
 
-**Propose 2-3 Solution Approaches:**
+#### Step 3: END GOAL + METRIC (what success looks like)
+
+**Q9:**
+"What is the ONE primary job this product performs? State it as one job, not three."
+
+**Q10:**
+"What is the success metric? Pick one number that moves if you succeed."
+
+**Q11:**
+"What is the guardrail metric? What must NOT get worse?"
+
+**Q12:**
+"State your hypothesis: 'We believe [action] will [outcome] for [persona], measured by [metric].'"
+
+**Q13:**
+"What is explicitly out of scope? Every product has boundaries — name at least one thing this will NOT do."
+
+**Rules for this step:**
+- Push back if "nothing is out of scope" — every product has boundaries
+- Check: is the success metric chosen by convention ("everyone tracks DAU") or because it genuinely measures the value delivered?
+- The hypothesis must be falsifiable — if you can't prove it wrong, it's not a real hypothesis
+
+**Output:** Primary job + success metric + guardrail + hypothesis + out of scope.
+
+---
+
+#### Step 4: METHODS (solutions + B=MAP validation)
+
+Propose 2-3 solution approaches:
 
 - **Approach A — Speed:** What could be built fastest?
 - **Approach B — Impact:** What creates the largest long-term result?
 - **Approach C — Simplicity:** What is the minimum viable version?
 
-Let the user choose or combine.
+**Validate each approach through the B=MAP lens** (BJ Fogg's Behavior Model: Behavior = Motivation × Ability × Prompt):
 
-#### Step 3: Roadmap and User Stories
+| B=MAP | Question | Red Flag |
+|---|---|---|
+| **Motivation** | Does the target user already want this outcome — or are we manufacturing desire? | If you have to convince users to want it, the pain from Step 1 isn't real. Don't manufacture fake motivation — find users who already have it. |
+| **Ability** | How easy is this to do? Rate each factor: | If 3+ factors are hard, adoption will fail regardless of motivation. |
+| | → Time: does it take too long? | |
+| | → Money: is it too costly? | |
+| | → Physical effort: is it too tiring? | |
+| | → Mental effort: is it too complex? | |
+| | → Routine fit: does it clash with what they already do? | |
+| **Prompt** | What triggers this behavior at the right moment? Is it natural or forced? | A prompt shown when motivation or ability is low is just noise — or worse, annoying. Timing matters enormously. |
 
-Define the product roadmap in phases:
+**Key insight:** Don't rely on motivation — it's volatile. Make the action as easy as possible. The approach where Motivation, Ability, and Prompt naturally converge is the winner.
+
+Let the user choose or combine approaches.
+
+**Output:** Chosen approach + B=MAP validation.
+
+---
+
+#### Validation Layer (run once after Steps 1-4)
+
+After completing all 4 steps, run these checks on the complete output:
+
+**Surface Assumptions:**
+
+Review everything from Steps 1-4. Identify embedded assumptions. For each:
+- State it in one sentence
+- Classify: **Convention** (industry norm) / **Imitation** (competitors do it) / **Precedent** (worked before) / **Fear** (we'd lose X) / **Unexamined default** (nobody questioned this)
+- Rate: High / Medium / Low (if false, would the problem change shape?)
+
+Present assumptions. Ask: **"Are any of these load-bearing assumptions wrong?"**
+
+**First Principles Filter:**
+
+1. Is this problem real even if every competitor disappeared tomorrow?
+2. Is this problem real even if the user had never tried any prior approach?
+3. Can it be stated without referencing any industry norm?
+
+If any test fails — flag which one and ask the PM to reframe.
+
+**"Should This Exist?" Gate:**
+
+1. Question the requirement itself — whose assumption is this? Is it actually necessary?
+2. What if we didn't build this at all? What happens?
+
+If "nothing much" — flag the risk. User can still proceed, but the risk is logged.
+
+---
+
+#### Roadmap and User Stories
+
+After validation passes, build the roadmap:
 
 1. **Map phases** — what does Phase 1 deliver? Phase 2? What's in/out of scope per phase?
 2. **Set timelines** — when does each phase start and end?
-3. **Write user stories** — Given-When-Then format, MoSCoW priority, assigned to phases
-4. **Validate stories** — INVEST checklist (Independent, Negotiable, Valuable, Estimable, Small, Testable)
+3. **Prioritize features** — assign priority (P1, P2, P3) per feature within each phase
+4. **Write user stories** — Given-When-Then format, MoSCoW priority, assigned to phases
+5. **Validate stories** — INVEST checklist (Independent, Negotiable, Valuable, Estimable, Small, Testable)
 
-Each user story will eventually get its own FRD written by the Feature Manager.
+Each user story will get its own FRD written by the Feature Manager.
 
-#### Step 4: Save the PRD
+#### Save the PRD
 
 Save to `docs/prd.md` (or `docs/prd/[product-name].md` for multi-product repos).
 

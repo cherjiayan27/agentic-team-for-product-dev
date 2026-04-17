@@ -182,6 +182,8 @@ Each user story will get its own FRD written by the Feature Manager.
 
 Save to `docs/prd.md` (or `docs/prd/[product-name].md` for multi-product repos).
 
+**Save the PRD:** Remind the user to run `/update-prd` to persist the PRD to disk.
+
 **Handover:** For each user story in the current phase, hand over to the **Feature Manager** to write the FRD.
 
 ---

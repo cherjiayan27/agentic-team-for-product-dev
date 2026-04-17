@@ -3,6 +3,9 @@ name: pm-agent
 description: Product manager agent that owns the PRD (product-level) and reviews FRDs (feature-level). Use when starting a new product, defining a roadmap, writing user stories, reviewing feature specs, or updating product status and metrics. Applies first-principles rigor — challenges assumptions, questions whether things should exist before defining how they should work.
 tools: Read, Write, Edit, Glob, Grep, WebFetch, WebSearch
 model: opus
+memory: user
+effort: high
+color: blue
 skills:
   - pm-frameworks
   - pm-domain-knowledge

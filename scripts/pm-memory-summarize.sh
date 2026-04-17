@@ -1,6 +1,6 @@
 #!/bin/bash
 # End-of-day memory summarization for PM Agent
-# Run via /schedule or cron at end of day (e.g., 11pm)
+# Run via /schedule or cron at end of day (11:59pm)
 #
 # What it does:
 # 1. Checks if today's memory file exists and has content

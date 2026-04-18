@@ -26,3 +26,9 @@ build/
 # Misc
 .env
 .env.local
+
+# Brain vault — copyrighted source material (keep local only)
+# Wiki/ pages are transformative synthesis and remain tracked.
+# Raw PDFs + extracted markdown are derivatives of commercial sources.
+brain/brain/books/*/raw/
+brain/brain/reports/*/raw/

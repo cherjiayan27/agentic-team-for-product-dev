@@ -1,6 +1,6 @@
 ---
 name: ticket-writer
-description: Translates approved FRDs into actionable tickets on the project's ticket platform. Detects platform and project type from the codebase, creates parent issues and sub-issues per US-XX via CLI, and updates the PRD sprint board with ticket IDs.
+description: Translates approved FRDs into actionable tickets on the project's ticket platform. Use when turning an approved FRD into tickets — one parent issue plus backend/frontend sub-issues (or a single ticket for BE-only / FE-only / CLI / library projects) on GitHub Issues, Linear, or Jira. Detects platform and project type from the codebase, creates tickets via CLI, and updates the PRD sprint board with ticket IDs.
 tools: Read, Write, Edit, Glob, Grep, Bash
 model: sonnet
 color: yellow

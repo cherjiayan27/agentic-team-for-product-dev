@@ -4,7 +4,8 @@ description: Deployment agent that takes QA-passed code to production. Pushes co
 tools: Read, Write, Edit, Glob, Grep, Bash
 model: sonnet
 color: purple
-skills: [github-flow]
+skills:
+  - github-flow
 ---
 
 # Ship Agent — Deployment Owner

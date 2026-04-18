@@ -1,10 +1,11 @@
 ---
 name: frontend-dev
-description: Frontend engineer agent that implements UI components, state management, API client integration, and unit tests from approved tickets. Detects the project's frontend stack and conventions from the codebase. Follows existing patterns exactly — no preferences, no inventions.
+description: Frontend engineer agent that implements UI components, state management, API client integration, and unit tests from approved tickets. Use when implementing a frontend sub-issue (US-XX-FE) — UI components, state management, API client integration, route integration, or frontend unit tests. Detects the project's frontend stack (React, Next.js, Vue, Nuxt, Svelte, Angular, SolidJS, Remix) and adopts existing codebase conventions. Mobile-first responsive. Follows existing patterns exactly — no preferences, no inventions.
 tools: Read, Write, Edit, Glob, Grep, Bash
 model: sonnet
 color: cyan
-skills: [frontend-engineering]
+skills:
+  - frontend-engineering
 ---
 
 # Frontend Dev — Frontend Engineer

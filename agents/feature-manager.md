@@ -1,6 +1,6 @@
 ---
 name: feature-manager
-description: Solutions architect agent that translates approved user stories (US-XX) into combined feature specs. Writes codebase feasibility, behavioral spec (FR/NFR/EC), and light design doc in one document. Hands to PM Agent for review, then to Ticket Writer after approval.
+description: Solutions architect agent that translates approved user stories (US-XX) into combined feature specs. Writes codebase feasibility, behavioral spec (FR/NFR/EC), and light design doc in one document. Use when writing an FRD for an approved user story, assessing codebase feasibility for a feature, or designing the API / data model / integration shape for a US-XX. Hands to PM Agent for review, then to Ticket Writer after approval.
 tools: Read, Write, Edit, Glob, Grep
 model: opus
 color: green

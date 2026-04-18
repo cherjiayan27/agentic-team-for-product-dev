@@ -26,8 +26,8 @@ A multi-agent pipeline powered by 8 specialist AI agents that takes a feature id
 | **pm-frameworks** | PM frameworks applied only when they sharpen the output — RICE, JTBD, MoSCoW, Kano, HEART, ICE, North Star, OST, Competitive Teardown, OKR Cascade, INVEST, B=MAP, First Principles, 30 UX Laws |
 | **spec-writing** | Spec writing references for Feature Manager — FRD quality bar with worked example, REST API design rules |
 | **ticket-writing** | Ticket writing references for Ticket Writer — story quality checks (inline), GWT AC patterns, story splitting techniques |
-| **backend-engineering** | Master routing skill for Backend Dev — maps detected stack and task type to specific external skills (framework patterns, migrations, security, testing) |
-| **frontend-engineering** | Master routing skill for Frontend Dev — maps detected stack, state management, test framework, and task type to inline conventions and sub-skills (design, UX, code quality) |
+| **backend-engineering** | Master routing skill for Backend Dev — routes codebase convention detection, Context7 framework queries, and task-type domain sub-skills (databases, security, api-design, performance) |
+| **frontend-engineering** | Master routing skill for Frontend Dev — routes codebase convention detection, Context7 framework / state / test queries, and inline fallback for React/Vue/Angular + cross-cutting sub-skills (design, UX, code quality) |
 | **qa** | Shared master routing skill for QA Tester + Code Reviewer — QA Tester reads the testing section (framework → testing skills); Code Reviewer reads the review section (lens → review skills) |
 | **github-flow** | Git + GitHub workflow for Ship Agent — branch, PR, CI, merge, and cleanup conventions |
 
@@ -191,6 +191,8 @@ agentic-team-for-product-dev/
 ## Product-Agnostic
 
 All 8 agents are product-agnostic. They detect the project's stack, conventions, and ticket platform from the codebase. Technology-specific knowledge lives in the project's own skills, not in agent definitions. The same agents work for any product — Go, Python, TypeScript, Swift, etc.
+
+**Framework canon via Context7.** Backend Dev, Frontend Dev, QA Tester, and Code Reviewer query [Context7](https://context7.com) on demand at `websites/<slug>` for current framework / library / test-framework / CVE guidance. Repo ships no bundled framework SKILLs. Agents require `WebFetch`; without network, they fall back to codebase detection and idiomatic defaults.
 
 ## Brain
 

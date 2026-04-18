@@ -12,6 +12,19 @@ All sub-skills live under subdirectories of this skill. Read them using the Read
 
 ---
 
+## Which agent reads which sections
+
+This router is shared by two agents. Each reads only the section relevant to its role:
+
+| Agent | Sections to load |
+|---|---|
+| **qa-tester** | "Job 1: Testing" (Steps 1a, 1b, 1c) — writing integration, EC, NFR, and E2E tests; deciding which testing skills to load |
+| **code-reviewer** | "Job 2: Code Review" — 6 lenses, which review skills to load per lens, PR-level review |
+
+The two agents run sequentially: qa-tester → code-reviewer → Ship Agent. Each uses only its own section to keep context focused.
+
+---
+
 ## Job 1: Testing
 
 ### Step 1a: Detect Integration Test Framework → Load Testing Skill

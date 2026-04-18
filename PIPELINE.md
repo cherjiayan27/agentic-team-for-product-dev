@@ -1,6 +1,6 @@
 # Multi-Agent Pipeline for Product Development
 
-A Spec-Driven Development (SDD) pipeline powered by 7 specialist agents. Takes a feature idea from problem validation through to deployed code — with full traceability from requirement IDs (FR-XX, EC-XX) to tests.
+A Spec-Driven Development (SDD) pipeline powered by 8 specialist agents. Takes a feature idea from problem validation through to deployed code — with full traceability from requirement IDs (FR-XX, EC-XX) to tests.
 
 ---
 
@@ -157,35 +157,53 @@ User idea
     │
     ▼
 ┌──────────────────────────────────────────────────────┐
-│  7. QA AGENT                                         │
+│  7. QA TESTER                                        │
 │                                                      │
-│  For EACH User Story (US-XX):                        │
-│                                                      │
-│  Testing (writes tests from the spec):               │
+│  For EACH User Story (US-XX), writes tests from      │
+│  the spec:                                           │
 │    → FR-XX → integration tests                       │
 │      (does the API/service behave as specified?)     │
-│    → NFR-XX → performance/security tests             │
+│    → NFR-XX → performance/security/a11y tests        │
 │      (does it meet the constraints?)                 │
 │    → EC-XX → edge case tests                         │
 │      (does it handle boundary conditions?)           │
 │    → User flow → E2E tests                           │
 │      (does the full journey work end to end?)        │
 │                                                      │
-│  Code review (6 specialist lenses):                  │
+│  Runs the full suite. If tests fail → sends back to  │
+│  the relevant Dev agent with the failing test ID,    │
+│  expected vs actual, and FR/EC mapping.              │
+│                                                      │
+│  Gate: All tests pass + coverage complete            │
+│  (every Must-have FR has a test, every EC has a      │
+│  test, all test names reference spec IDs).           │
+└──────────────────────────────────────────────────────┘
+    │  Tests pass
+    ▼
+┌──────────────────────────────────────────────────────┐
+│  8. CODE REVIEWER                                    │
+│                                                      │
+│  Reviews the full diff for US-XX across 6 lenses:    │
 │    → Code quality (bugs, logic errors)               │
 │    → Security (injection, auth, secrets)             │
 │    → Performance (N+1 queries, bundle size, memory)  │
-│    → Conventions (naming, patterns, structure)        │
-│    → Holistic (architectural fit, cross-cutting)     │
-│    → FR/EC traceability (test names match IDs)       │
+│    → Conventions (naming, patterns, structure,       │
+│      Karpathy discipline)                            │
+│    → Holistic (architectural fit, regressions,       │
+│      cross-cutting concerns)                         │
+│    → FR/EC traceability (spec coverage, test naming) │
 │                                                      │
-│  If tests fail or issues found → Dev fixes → re-QA   │
-│  Gate: All tests pass + all critical issues resolved │
+│  Severity gate:                                      │
+│    → Critical / High → block, send back to Dev       │
+│    → Medium / Low → flag, dev decides                │
+│                                                      │
+│  Does not write tests. Does not fix bugs.            │
+│  Only invoked after QA Tester issues pass verdict.   │
 └──────────────────────────────────────────────────────┘
-    │  QA passed
+    │  Review passed
     ▼
 ┌──────────────────────────────────────────────────────┐
-│  8. SHIP AGENT                                       │
+│  9. SHIP AGENT                                       │
 │                                                      │
 │  Push + PR:                                          │
 │    → git push → create draft PR                      │
@@ -217,7 +235,8 @@ User idea
 │  → PM Agent re-reviews FRD                           │
 │  → PM Agent updates PRD if needed                    │
 │  → Dev agent fixes code                              │
-│  → QA Agent re-reviews                               │
+│  → QA Tester re-runs affected tests                  │
+│  → Code Reviewer re-reviews changed sections only    │
 │  → Ship Agent pushes the fix                         │
 │                                                      │
 │  Debug the spec, not the code.                       │
@@ -235,8 +254,9 @@ User idea
 | 3 | **Ticket Writer** | Ticket factory. Detects platform and project type, creates parent + sub-issues via CLI per US-XX, updates PRD sprint board with ticket IDs. | Platform detection, ticket decomposition, acceptance criteria mapping, sub-issue structure, blocking relationships |
 | 4 | **Backend Dev** | Backend engineer. Reads backend sub-issue, detects stack and conventions from codebase, implements data models → migrations → services → API endpoints → unit tests. Signals completion with passing tests before Frontend starts. | Stack detection, convention adoption, data modeling, migrations, service layer, API handlers, FR/EC-traced unit tests |
 | 5 | **Frontend Dev** | Frontend engineer. Reads frontend sub-issue after backend is done, detects stack and conventions from codebase, implements API client → state → components → route integration → unit tests. Mobile-first responsive. | Stack detection, component architecture, state management, API integration, FR/EC-traced unit tests, responsive design |
-| 6 | **QA Agent** | Quality gatekeeper. Reads FRD to write integration (FR-XX), edge case (EC-XX), NFR constraint, and E2E tests. Reviews code across 6 lenses. Critical/High findings block handoff. Sends back to dev until gate passes. | Spec-driven testing, integration tests, E2E tests, code quality, security, performance, conventions, FR/EC traceability |
-| 7 | **Ship Agent** | Deployment owner. Pushes branch, creates structured draft PR, marks ready for CI, squash merges on green, runs canary checks post-deploy, reverts on critical failure, prunes branches. | Git workflow, PR creation, CI monitoring, squash merge, deploy platform detection, canary checks, revert, branch cleanup |
+| 6 | **QA Tester** | Test author. Reads FRD to write integration (FR-XX), edge case (EC-XX), NFR constraint, and E2E tests. Runs suite. Sends failures back to dev with FR/EC mapping. Hands pass verdict to Code Reviewer. | Spec-driven testing, integration tests, E2E tests, coverage traceability, failure diagnosis |
+| 7 | **Code Reviewer** | Diff reviewer. Reviews the US-XX diff across 6 lenses (quality, security, performance, conventions, holistic, traceability). Critical/High findings block handoff. Only runs after QA Tester issues pass verdict. | Code quality, security audit, performance review, convention enforcement, Karpathy discipline, cross-cutting concerns |
+| 8 | **Ship Agent** | Deployment owner. Pushes branch, creates structured draft PR, marks ready for CI, squash merges on green, runs canary checks post-deploy, reverts on critical failure, prunes branches. | Git workflow, PR creation, CI monitoring, squash merge, deploy platform detection, canary checks, revert, branch cleanup |
 
 ---
 
@@ -289,25 +309,34 @@ Standard development workflow:
 - Frontend Dev picks up frontend sub-issue after backend is done
 - Both reference FR-XX / EC-XX IDs in test names
 
-### Dev Agents → QA Agent
+### Dev Agents → QA Tester
 
-After both backend and frontend are committed, the QA Agent does two jobs:
+After both backend and frontend are committed, the QA Tester runs a spec-driven testing pass:
 
-**Testing (per User Story):**
 - Reads FR-XX → writes integration tests (does the API/service behave as specified?)
-- Reads NFR-XX → writes performance/security tests (does it meet the constraints?)
+- Reads NFR-XX → writes performance/security/accessibility tests (does it meet the constraints?)
 - Reads EC-XX → writes edge case tests (does it handle boundary conditions?)
 - Writes E2E tests for the full user flow (does the journey work end to end?)
 
-**Code Review:**
-- 6 specialist lenses (quality, security, performance, conventions, holistic, FR/EC traceability)
+Runs the full suite.
 
-If tests fail or code issues found → Dev fixes → QA re-runs.
-Gate: all tests pass + all critical issues resolved.
+If tests fail → sends the failing test ID, expected vs actual, and FR/EC mapping back to the relevant dev agent. Re-runs after fix.
+Gate: all tests pass + every Must-have FR and every EC has a test + all test names reference FR/EC IDs.
 
-### QA Agent → Ship Agent
+### QA Tester → Code Reviewer
 
-Once QA passes:
+Once the test gate passes, the Code Reviewer reviews the US-XX diff across 6 lenses:
+quality, security, performance, conventions (including Karpathy discipline), holistic, FR/EC traceability.
+
+Critical / High findings → sent back to the relevant dev agent with severity, lens, file, line, and fix direction.
+Medium / Low findings → flagged; dev decides.
+
+Re-review after fix scopes to the changed sections only.
+Gate: no Critical or High findings unresolved.
+
+### Code Reviewer → Ship Agent
+
+Once the review gate passes:
 - Ship Agent takes over to get the code to production
 - Push → create draft PR with structured body
 - Mark PR ready → wait for CI → fix if CI fails
@@ -358,8 +387,8 @@ PRD (one per product)
 | Type | What It Tests | Speed | Cost | Who Writes It |
 |---|---|---|---|---|
 | **Unit Tests** | A single function/method in isolation (mocks everything else) | Fast | Cheap | Backend Dev / Frontend Dev |
-| **Integration Tests** | Multiple components working together (e.g., service + database, API + auth) | Medium | Medium | QA Agent |
-| **E2E Tests** | The full user flow through the real system (browser → UI → API → DB → response) | Slow | Expensive | QA Agent |
+| **Integration Tests** | Multiple components working together (e.g., service + database, API + auth) | Medium | Medium | QA Tester |
+| **E2E Tests** | The full user flow through the real system (browser → UI → API → DB → response) | Slow | Expensive | QA Tester |
 
 ### The Testing Pyramid
 
@@ -383,7 +412,8 @@ Most tests should be unit tests (fast, cheap, catch most bugs). Integration test
 |---|---|---|
 | **Backend Dev** | Unit tests | Tests their own code works in isolation (services, controllers, utilities) |
 | **Frontend Dev** | Unit tests | Tests their own code works in isolation (components, hooks, helpers) |
-| **QA Agent** | Integration tests + E2E tests | Tests the system behaves as specified — written directly from FR/NFR/EC per user story |
+| **QA Tester** | Integration tests + E2E tests | Tests the system behaves as specified — written directly from FR/NFR/EC per user story |
+| **Code Reviewer** | — (does not write tests) | Reviews the diff across 6 lenses after QA Tester passes; surfaces FR/EC coverage gaps as Lens 6 findings |
 
 **Devs test their own code works.** (unit tests — fast, isolated, implementation-focused)
 
@@ -459,7 +489,7 @@ Skills are reusable knowledge packages that agents preload.
 | **ticket-writing** | Agent-only (preloaded) | Ticket Writer | Ticket writing references — GWT acceptance criteria patterns for 10 feature types (auth, CRUD, search, file upload, payment, notifications, negative tests, performance, accessibility) |
 | **backend-engineering** | Agent-only (preloaded) | Backend Dev | Master routing skill — maps detected stack and task type to specific sub-skills (framework patterns, migrations, security, testing) |
 | **frontend-engineering** | Agent-only (preloaded) | Frontend Dev | Master routing skill — maps detected stack, state management, test framework, and task type to inline conventions and sub-skills (design, UX, code quality) |
-| **qa** | Agent-only (preloaded) | QA Agent | Master routing skill — maps detected test framework and code review lens to specific sub-skills (testing guides, E2E frameworks, review references) |
+| **qa** | Agent-only (preloaded) | QA Tester + Code Reviewer | Shared master routing skill — QA Tester reads the "Job 1: Testing" section (test framework → testing skills); Code Reviewer reads the "Job 2: Code Review" section (lens → review skills) |
 | **github-flow** | Agent-only (preloaded) | Ship Agent | Git + GitHub workflow — branch, PR, CI, merge, and cleanup conventions |
 
 ---

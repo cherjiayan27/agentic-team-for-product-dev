@@ -1,12 +1,12 @@
 # Agentic Team for Product Development
 
-A multi-agent pipeline powered by 7 specialist AI agents that takes a feature idea from problem validation through to deployed code. Built on Spec-Driven Development (SDD) — every requirement is traceable from spec (FR-XX, EC-XX) to test to production.
+A multi-agent pipeline powered by 8 specialist AI agents that takes a feature idea from problem validation through to deployed code. Built on Spec-Driven Development (SDD) — every requirement is traceable from spec (FR-XX, EC-XX) to test to production.
 
 **See [PIPELINE.md](PIPELINE.md) for the full pipeline documentation.**
 
 ---
 
-## The 7 Agents
+## The 8 Agents
 
 | # | Agent | Role |
 |---|---|---|
@@ -15,8 +15,9 @@ A multi-agent pipeline powered by 7 specialist AI agents that takes a feature id
 | 3 | **Ticket Writer** | Detects platform + project type, creates parent + sub-issues via CLI per US-XX, updates PRD sprint board |
 | 4 | **Backend Dev** | Detects backend stack, implements data models, migrations, services, API endpoints, and unit tests per backend sub-issue |
 | 5 | **Frontend Dev** | Detects frontend stack, implements UI components, state management, API integration, and unit tests per frontend sub-issue |
-| 6 | **QA Agent** | Writes integration, edge case, NFR, and E2E tests from FRD spec. Reviews code across 6 lenses. Gates handoff to Ship Agent. |
-| 7 | **Ship Agent** | Pushes branch, creates structured PR, monitors CI, squash merges on green, verifies deploy with canary checks, reverts on critical failure, cleans up branches |
+| 6 | **QA Tester** | Writes integration, edge case, NFR, and E2E tests from the FRD spec. Runs the suite. Sends failures back to the dev agent until all tests pass. |
+| 7 | **Code Reviewer** | Reviews the US-XX diff across 6 lenses (quality, security, performance, conventions, holistic, FR/EC traceability). Critical/High findings block handoff. |
+| 8 | **Ship Agent** | Pushes branch, creates structured PR, monitors CI, squash merges on green, verifies deploy with canary checks, reverts on critical failure, cleans up branches |
 
 ## Skills
 
@@ -27,7 +28,7 @@ A multi-agent pipeline powered by 7 specialist AI agents that takes a feature id
 | **ticket-writing** | Ticket writing references for Ticket Writer — story quality checks (inline), GWT AC patterns, story splitting techniques |
 | **backend-engineering** | Master routing skill for Backend Dev — maps detected stack and task type to specific external skills (framework patterns, migrations, security, testing) |
 | **frontend-engineering** | Master routing skill for Frontend Dev — maps detected stack, state management, test framework, and task type to inline conventions and sub-skills (design, UX, code quality) |
-| **qa** | Master routing skill for QA Agent — maps detected test framework and code review lens to specific sub-skills (testing guides, E2E frameworks, review references) |
+| **qa** | Shared master routing skill for QA Tester + Code Reviewer — QA Tester reads the testing section (framework → testing skills); Code Reviewer reads the review section (lens → review skills) |
 | **github-flow** | Git + GitHub workflow for Ship Agent — branch, PR, CI, merge, and cleanup conventions |
 
 ---
@@ -49,7 +50,8 @@ ln -s ~/agentic-team-for-product-dev/agents/feature-manager.md ~/.claude/agents/
 ln -s ~/agentic-team-for-product-dev/agents/ticket-writer.md ~/.claude/agents/ticket-writer.md
 ln -s ~/agentic-team-for-product-dev/agents/backend-dev.md ~/.claude/agents/backend-dev.md
 ln -s ~/agentic-team-for-product-dev/agents/frontend-dev.md ~/.claude/agents/frontend-dev.md
-ln -s ~/agentic-team-for-product-dev/agents/qa-agent.md ~/.claude/agents/qa-agent.md
+ln -s ~/agentic-team-for-product-dev/agents/qa-tester.md ~/.claude/agents/qa-tester.md
+ln -s ~/agentic-team-for-product-dev/agents/code-reviewer.md ~/.claude/agents/code-reviewer.md
 ln -s ~/agentic-team-for-product-dev/agents/ship-agent.md ~/.claude/agents/ship-agent.md
 
 # 4. Symlink skills
@@ -86,19 +88,27 @@ git pull
 
 ## Usage
 
-### Start a session with a specific agent
+### Auto-delegation (recommended)
 
-```bash
-claude --agent pm-agent
-```
-
-### Or let Claude delegate automatically
-
-In a normal Claude Code session, describe a task that matches an agent's description. Claude delegates to the right agent automatically.
+In a normal Claude Code session, describe a task that matches an agent's description. Claude delegates to the right agent automatically via the Task tool.
 
 ```
-"I want to validate a new feature idea"  →  PM Agent picks it up
+"I want to validate a new feature idea"   →  PM Agent picks it up
+"Write the FRD for US-01"                 →  Feature Manager picks it up
+"Create tickets for the approved FRD"     →  Ticket Writer picks it up
+"Implement the backend for US-01-BE"      →  Backend Dev picks it up
 ```
+
+### Explicit invocation
+
+Name the agent at the start of your message when you want a specific one:
+
+```
+"Use pm-agent to validate this new feature idea"
+"Ask feature-manager to draft the FRD for US-01"
+```
+
+Agents are matched by the `description` field in their frontmatter, so clear, specific descriptions are what makes delegation work.
 
 ---
 
@@ -114,7 +124,8 @@ agentic-team-for-product-dev/
     ticket-writer.md                       # Ticket Writer (platform detection, CLI ticket creation, sprint board update)
     backend-dev.md                         # Backend Dev (stack detection, data models, migrations, services, API, unit tests)
     frontend-dev.md                        # Frontend Dev (stack detection, components, state, API integration, unit tests)
-    qa-agent.md                            # QA Agent (spec-driven tests: FR/EC/NFR/E2E, 6-lens code review, gate)
+    qa-tester.md                           # QA Tester (spec-driven tests: FR/EC/NFR/E2E)
+    code-reviewer.md                       # Code Reviewer (6-lens diff review, severity gate)
     ship-agent.md                          # Ship Agent (push, PR, CI, squash merge, canary checks, revert, cleanup)
   skills/
     pm-frameworks/

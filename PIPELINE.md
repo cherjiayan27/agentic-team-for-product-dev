@@ -476,6 +476,8 @@ All 8 agents are **product-agnostic**. They are experts at their role, not at a 
 
 The technology-specific knowledge lives in the **project's own skills** (e.g., a project might have `nestjs-best-practices` or `django-patterns`), not in the agent definitions. This means the same Backend Dev agent works for a Go project, a Python project, or a TypeScript project.
 
+Framework canon (Django, Spring Boot, Rust, React, Vue, etc.) is queried from Context7 on demand rather than bundled as local skills. Agents require `WebFetch` access. Without network, agents fall back to codebase detection and idiomatic defaults.
+
 ---
 
 ## Skills
@@ -487,8 +489,8 @@ Skills are reusable knowledge packages that agents preload.
 | **pm-frameworks** | Agent-only (preloaded) | PM Agent | PM frameworks applied only when they sharpen the output — RICE, JTBD, MoSCoW, Kano, HEART, ICE, North Star, OST, Competitive Teardown, OKR Cascade, INVEST, B=MAP, First Principles, 30 UX Laws |
 | **spec-writing** | Agent-only (preloaded) | Feature Manager | Spec writing references — FRD quality bar with worked example (Step 2), REST API design rules for light design docs (Step 3) |
 | **ticket-writing** | Agent-only (preloaded) | Ticket Writer | Ticket writing references — GWT acceptance criteria patterns for 10 feature types (auth, CRUD, search, file upload, payment, notifications, negative tests, performance, accessibility) |
-| **backend-engineering** | Agent-only (preloaded) | Backend Dev | Master routing skill — maps detected stack and task type to specific sub-skills (framework patterns, migrations, security, testing) |
-| **frontend-engineering** | Agent-only (preloaded) | Frontend Dev | Master routing skill — maps detected stack, state management, test framework, and task type to inline conventions and sub-skills (design, UX, code quality) |
+| **backend-engineering** | Agent-only (preloaded) | Backend Dev | Master routing skill — routes codebase convention detection, Context7 framework queries (`context7.com/websites/<slug>`), and task-type domain sub-skills (databases, security, api-design, performance) |
+| **frontend-engineering** | Agent-only (preloaded) | Frontend Dev | Master routing skill — routes codebase convention detection, Context7 framework / state / test queries, and inline fallback for React/Vue/Angular + cross-cutting sub-skills (design, UX, code quality) |
 | **qa** | Agent-only (preloaded) | QA Tester + Code Reviewer | Shared master routing skill — QA Tester reads the "Job 1: Testing" section (test framework → testing skills); Code Reviewer reads the "Job 2: Code Review" section (lens → review skills) |
 | **github-flow** | Agent-only (preloaded) | Ship Agent | Git + GitHub workflow — branch, PR, CI, merge, and cleanup conventions |
 

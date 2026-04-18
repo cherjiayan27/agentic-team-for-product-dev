@@ -10,50 +10,89 @@ Read this once at the start of every frontend sub-issue. Based on your detected 
 
 ---
 
-## Step 1: Detect Stack → Apply Framework Conventions
+## Step 1: Framework Conventions — 3-Tier Source Order
 
-Match against `package.json` dependencies. Read the row for your detected stack.
+Match against `package.json` dependencies to identify the stack, then source conventions in this order:
 
-| Detected Stack | Detection Signal | Key Conventions |
+### Tier 1 — Codebase detection (primary)
+
+Read 2-3 existing component / page / route files and adopt their exact pattern. File structure, prop types, export style, styling approach, data fetching pattern — all learned from what the project already ships.
+
+### Tier 2 — Context7 query (secondary)
+
+If the project is greenfield or the needed pattern has no existing example, query Context7:
+
+```
+WebFetch(
+  url:    "https://context7.com/websites/<slug>",
+  prompt: "Current idiomatic way to <specific pattern>. Include imports and a short example."
+)
+```
+
+**Framework slug table:**
+
+| Stack | Detection Signal | Context7 slug |
 |---|---|---|
-| React (SPA) | `react` + `vite` or `react-scripts` | Functional components only. Hooks for all state and side effects. No class components. Co-locate component + styles + tests in one folder. |
-| Next.js | `next` in `package.json` | App Router (Next 13+): server components by default, `"use client"` only when interactivity required. Pages Router (Next 12-): `getServerSideProps` / `getStaticProps`. File-based routing — new routes go under `app/` or `pages/`. |
-| Vue.js | `vue` (v3) | Composition API + `<script setup>`. Options API only if codebase already uses it. `defineProps` / `defineEmits` for component contracts. |
-| Nuxt.js | `nuxt` | Auto-imports: no manual imports for composables or components. `useAsyncData` / `useFetch` for data fetching. File-based routing under `pages/`. |
-| Svelte | `svelte` | Reactive declarations (`$:`). Stores (`writable` / `readable` / `derived`) for shared state. No virtual DOM — write plain Svelte, not React-style. |
-| Angular | `@angular/core` | Modules + Injectable services. Standalone components if project already uses them (`standalone: true`). RxJS Observables for async — no raw Promises unless existing code uses them. |
-| SolidJS | `solid-js` | Signals for reactive state. `createSignal`, `createMemo`, `createEffect`. No `useState` — Solid is not React. |
-| Remix | `remix` | Loaders for data fetching (server-side), Actions for mutations. No client-side fetch for initial data. Nested routes. |
+| React (SPA) | `react` + `vite` or `react-scripts` | `react_dev_en` |
+| Next.js | `next` in `package.json` | `nextjs_org_docs_en` |
+| Vue.js | `vue` (v3) | `vuejs_org_en` |
+| Nuxt.js | `nuxt` | `nuxt_com_docs_en` |
+| Svelte | `svelte` | `svelte_dev_docs_en` |
+| Angular | `@angular/core` | `angular_dev_en` |
+| SolidJS | `solid-js` | `docs_solidjs_com_en` |
+| Remix | `remix` | `remix_run_docs_en` |
 
-If no skill exists for the detected stack: read two to three existing component files and adopt their exact pattern.
+### Tier 3 — Inline fallback + PR flag
+
+For the three most common stacks, inline conventions are kept below as offline / failed-fetch insurance. For other stacks, fall back to idiomatic defaults and note in a PR comment.
+
+**React fallback conventions.** Functional components only. Hooks for all state and side effects. No class components. Co-locate component + styles + tests in one folder.
+
+**Vue fallback conventions.** Composition API + `<script setup>`. Options API only if codebase already uses it. `defineProps` / `defineEmits` for component contracts.
+
+**Angular fallback conventions.** Modules + Injectable services. Standalone components if project already uses them (`standalone: true`). RxJS Observables for async — no raw Promises unless existing code uses them.
+
+For Next, Nuxt, Svelte, SolidJS, Remix, and any other stack: codebase detection → Context7 query → idiomatic default + PR flag.
 
 ---
 
-## Step 2: Detect State Management → Apply State Conventions
+## Step 2: State Management — 3-Tier Source Order
 
-| Dependency | Pattern | Key Rules |
+Same tier order as Step 1: codebase → Context7 → inline fallback for the most common.
+
+**Detection table:**
+
+| Dependency | Library | Context7 slug |
 |---|---|---|
-| `zustand` | Zustand stores | One store per feature domain. Selectors inline in component (`useStore(s => s.field)`). Actions defined inside `create()`. |
-| `@reduxjs/toolkit` | Redux Toolkit slices | One slice per feature. `createSlice` + `createAsyncThunk`. Selectors in `selectors.ts` alongside the slice. Never mutate state outside a reducer. |
-| `jotai` | Jotai atoms | Atoms for shared state, `useAtom` in components. Derived atoms with `atom(get => ...)`. No global store object. |
-| `@tanstack/react-query` | React Query (server state) | `useQuery` for reads, `useMutation` for writes. Invalidate on mutation success. Cache keys follow `[entity, id]` convention. |
-| `swr` | SWR | `useSWR` with consistent key strings. Mutations via `mutate`. Deduplicate by key. |
-| None | Local state | `useState` / `useReducer` / `ref` / `signal` depending on stack. Lift state only when two+ siblings need it. |
+| `zustand` | Zustand | `zustand_docs_pmnd_rs_en` |
+| `@reduxjs/toolkit` | Redux Toolkit | `redux_toolkit_js_org_en` |
+| `jotai` | Jotai | `jotai_org_docs_en` |
+| `@tanstack/react-query` | TanStack Query | `tanstack_com_query_latest_en` |
+| `swr` | SWR | `swr_vercel_app_docs_en` |
+| None | Local state | *(no fetch needed — use framework primitive: `useState`, `ref`, signal, etc.)* |
+
+**Inline fallback (local state, no library):** `useState` / `useReducer` / `ref` / `signal` depending on stack. Lift state only when two+ siblings need it.
+
+For external state libs, prefer Context7 over inventing patterns. If fetch fails and no codebase example exists, flag in the PR.
 
 ---
 
-## Step 3: Detect Test Framework → Apply Testing Conventions
+## Step 3: Test Framework — 3-Tier Source Order
 
-| Signal | Framework | Test Conventions |
+Same tier order as Steps 1-2. Pick the framework from the signal, source conventions in order.
+
+**Detection + slug table:**
+
+| Signal | Framework | Context7 slug |
 |---|---|---|
-| `@testing-library/react` + `jest` | Jest + RTL | `render()` → query by role/label → `userEvent` for interactions. No shallow rendering. Mock API calls with `msw` or `jest.mock`. |
-| `vitest` + `@testing-library/react` | Vitest + RTL | Same RTL conventions. `vi.mock()` instead of `jest.mock()`. `vi.fn()` instead of `jest.fn()`. |
-| `@testing-library/vue` | Vue Testing Library | `render()` + `@testing-library/user-event`. Mount options for `global.plugins` (router, pinia). |
-| `@angular/core/testing` | Angular TestBed | `TestBed.configureTestingModule()`. `ComponentFixture` + `detectChanges()`. Spy on services with `jasmine.createSpyObj`. |
-| `@playwright/test` (component) | Playwright CT | `mount()` from `@playwright/experimental-ct-react` or equivalent. |
-| No test files found (greenfield) | Detect from package.json | Jest + RTL for React/Vue. Vitest if `vitest` present. Angular TestBed for Angular. |
+| `@testing-library/react` + `jest` | Jest + RTL | `testing_library_com_docs_react_testing_library_en` |
+| `vitest` + `@testing-library/react` | Vitest + RTL | `vitest_dev_en` |
+| `@testing-library/vue` | Vue Testing Library | `testing_library_com_docs_vue_testing_library_en` |
+| `@angular/core/testing` | Angular TestBed | `angular_dev_guide_testing_en` |
+| `@playwright/test` (component) | Playwright CT | `playwright_dev_docs_test_components_en` |
+| No test files (greenfield) | Pick from package.json signals | Query Context7 for the chosen framework's current conventions |
 
-**Test naming — always reference FR/EC IDs:**
+**Test naming — always reference FR/EC IDs** (repo-specific convention, no framework doc covers this):
 
 ```
 it('FR-03: renders user profile with display name', ...)

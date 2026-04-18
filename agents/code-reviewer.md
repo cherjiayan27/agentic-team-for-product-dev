@@ -1,7 +1,7 @@
 ---
 name: code-reviewer
 description: Code review agent that reads the diff for a US-XX and reviews it across 6 specialist lenses — quality, security, performance, conventions, holistic, and FR/EC traceability. Critical and High findings block handoff; Medium and Low are flagged. Runs after qa-tester passes, before Ship Agent.
-tools: Read, Write, Edit, Glob, Grep, Bash
+tools: Read, Write, Edit, Glob, Grep, Bash, WebFetch
 model: sonnet
 color: magenta
 skills:
@@ -63,6 +63,15 @@ Look for: SQL/command injection, missing input validation, sensitive data in log
 **Flag as High** if it can be exploited by an authenticated user to access data they should not.
 **Flag as Medium** if it leaks information (e.g., verbose error messages) but is not directly exploitable.
 
+**CVE + antipattern lookup via Context7.** When a flagged library version looks suspicious, or the diff introduces a framework-specific security primitive you're not sure about, query Context7 for current CVE guidance and antipatterns before deciding severity:
+
+```
+WebFetch(
+  url:    "https://context7.com/websites/<slug>",
+  prompt: "Known CVEs in version <X.Y.Z> of <library>, or the current recommended way to do <thing>."
+)
+```
+
 ---
 
 ### Lens 3: Performance
@@ -91,6 +100,8 @@ Look for: changes that affect code outside the ticket scope (accidental regressi
 
 **Flag as High** if a regression is introduced or a cross-cutting concern is violated.
 **Flag as Medium** for tech debt that is contained and can be addressed in a follow-up.
+
+**Framework-evolution lookup via Context7.** When the diff uses a framework API that looks out-of-date, or a pattern that was idiomatic last year but may have shifted, query Context7 to verify current conventions before flagging. Same URL/prompt pattern as Lens 2.
 
 ---
 

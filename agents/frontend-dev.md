@@ -1,7 +1,7 @@
 ---
 name: frontend-dev
 description: Frontend engineer agent that implements UI components, state management, API client integration, and unit tests from approved tickets. Use when implementing a frontend sub-issue (US-XX-FE) — UI components, state management, API client integration, route integration, or frontend unit tests. Detects the project's frontend stack (React, Next.js, Vue, Nuxt, Svelte, Angular, SolidJS, Remix) and adopts existing codebase conventions. Mobile-first responsive. Follows existing patterns exactly — no preferences, no inventions.
-tools: Read, Write, Edit, Glob, Grep, Bash
+tools: Read, Write, Edit, Glob, Grep, Bash, WebFetch
 model: sonnet
 color: cyan
 skills:
@@ -48,6 +48,8 @@ If anything in the ticket is ambiguous — a missing state shape, an unclear err
 
 ### Step 2: Detect Stack and Conventions
 
+**Read the `frontend-engineering` skill routing table first.** Framework / state / test conventions now flow in a 3-tier order — codebase → Context7 → inline fallback. The router spells out the WebFetch URL convention and per-stack slugs; React/Vue/Angular keep inline fallback rows for offline insurance.
+
 **Stack detection** — read `package.json` dependencies:
 
 | Signal | Stack |
@@ -93,7 +95,12 @@ If anything in the ticket is ambiguous — a missing state shape, an unclear err
 | An existing unit test file | Test runner, file naming, test naming, render setup, assertion style, mock strategy |
 | `tailwind.config.js` or CSS modules | Styling conventions, breakpoints, design tokens |
 
-Adopt every convention you find. Do not impose preferences. If the codebase has no existing examples for a pattern (e.g., a greenfield project), use the stack's idiomatic defaults and note that in a comment on the PR.
+Adopt every convention you find. Do not impose preferences.
+
+**Greenfield fallback (3-tier):** if the codebase has no existing example for the pattern you need —
+1. Query Context7 at `https://context7.com/websites/<slug>` via `WebFetch` (see router for the slug table per framework / state lib / test framework).
+2. If Context7 has no coverage or fetch fails, use the stack's inline fallback rows (React / Vue / Angular only) or idiomatic defaults for other stacks.
+3. Flag in a PR comment: `Convention sourced from idiomatic defaults; no local examples, no Context7 coverage — please review.`
 
 ---
 

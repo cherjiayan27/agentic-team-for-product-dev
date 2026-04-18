@@ -39,7 +39,7 @@ Detect from existing test files first, then confirm against project config.
 
 | Detected Framework | Detection Signal | Skill Path |
 |---|---|---|
-| Playwright | `@playwright/test` in `package.json` or existing `*.spec.ts` in `e2e/` or `tests/` | `playwright-pro/SKILL.md` — entry point; contains templates organized by feature type (`templates/auth/`, `templates/crud/`, `templates/forms/`, `templates/search/`, `templates/checkout/`, `templates/dashboard/`, `templates/notifications/`, `templates/onboarding/`) — navigate to the relevant template subdirectory when writing E2E tests for that feature type |
+| Playwright | `@playwright/test` in `package.json` or existing `*.spec.ts` in `e2e/` or `tests/` | `playwright/SKILL.md` — entry point; contains templates organized by feature type (`templates/auth/`, `templates/crud/`, `templates/forms/`, `templates/search/`, `templates/checkout/`, `templates/dashboard/`, `templates/notifications/`, `templates/onboarding/`) — navigate to the relevant template subdirectory when writing E2E tests for that feature type |
 | Cypress | `cypress` in `package.json` or existing `cypress/` directory | *(detect from existing Cypress test files — no dedicated skill)* |
 | No E2E framework | Neither Playwright nor Cypress found | Flag to user — E2E tests require a framework to be installed |
 
@@ -90,7 +90,7 @@ Load the skill for each lens you are applying. Read before writing findings for 
 
 | Always | Conditional |
 |---|---|
-| One testing skill (or detect from existing files) | `playwright-pro` — if Playwright is the E2E framework |
+| One testing skill (or detect from existing files) | `playwright` — if Playwright is the E2E framework |
 | `code-reviewer` (Lens 1 + Lens 4) | `adversarial-reviewer` — if Lens 5 surfaces architectural or cross-cutting concerns |
 | `verification-before-completion` — after each dev fix | `karpathy-coder` — if Lens 4 finds divergence from codebase conventions |
 | | `review` — when issuing the final PR verdict |

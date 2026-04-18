@@ -63,7 +63,7 @@ Load the skill for each lens you are applying. Read before writing findings for 
 | Lens 1: Code Quality | Bugs, logic errors, null handling, race conditions | `code-reviewer/SKILL.md` |
 | Lens 2: Security | Injection, auth, secrets, CSRF, IDOR | *(inline in qa-agent — no dedicated security skill in this folder)* |
 | Lens 3: Performance | N+1 queries, unbounded queries, memory leaks | *(inline in qa-agent — no dedicated performance skill in this folder)* |
-| Lens 4: Conventions | Naming, file placement, error handling patterns | `code-reviewer/SKILL.md` + `karpathy-coder/SKILL.md` |
+| Lens 4: Conventions | Naming, file placement, error handling patterns | `code-reviewer/SKILL.md` + `karpathy-review/SKILL.md` |
 | Lens 5: Holistic | Regressions, cross-cutting concerns, tech debt | `adversarial-reviewer/SKILL.md` |
 | Lens 6: FR/EC Traceability | Test names match spec IDs, every FR/EC covered | *(inline in qa-agent — no external skill needed)* |
 
@@ -92,5 +92,5 @@ Load the skill for each lens you are applying. Read before writing findings for 
 |---|---|
 | One testing skill (or detect from existing files) | `playwright` — if Playwright is the E2E framework |
 | `code-reviewer` (Lens 1 + Lens 4) | `adversarial-reviewer` — if Lens 5 surfaces architectural or cross-cutting concerns |
-| `verification-before-completion` — after each dev fix | `karpathy-coder` — if Lens 4 finds divergence from codebase conventions |
+| `verification-before-completion` — after each dev fix | `karpathy-review` — if Lens 4 finds divergence from codebase conventions |
 | | `review` — when issuing the final PR verdict |

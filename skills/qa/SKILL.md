@@ -50,7 +50,7 @@ After dev signals a fix is done, before re-running full suite:
 | Situation | Skill Path |
 |---|---|
 | Verifying a specific fix actually resolves the reported issue | `verification-before-completion/SKILL.md` |
-| Build error encountered during test run | `_agent--build-error-resolver.md` |
+| Build error encountered during test run | Send back to the relevant dev agent — build errors are implementation concerns, not QA scope |
 
 ---
 
@@ -72,8 +72,6 @@ Load the skill for each lens you are applying. Read before writing findings for 
 | Trigger | Skill Path |
 |---|---|
 | Full PR diff review (all 6 lenses combined) | `review/SKILL.md` |
-| Browser-based QA of a deployed build (with fixes) | `qa/SKILL.md` |
-| Report-only browser QA (no fixes, findings only) | `qa-only/SKILL.md` |
 
 ---
 
@@ -81,7 +79,6 @@ Load the skill for each lens you are applying. Read before writing findings for 
 
 | Skill | Skip because |
 |---|---|
-| `test-driven-development/SKILL.md` | TDD methodology for devs writing code test-first — QA writes from spec, not from code. Do not load. |
 | Backend framework skills | Backend Dev's domain — review behavior, not implementation patterns |
 | Architecture skills | Feature Manager produced the design doc — not QA scope |
 | DevOps / CI/CD | Ship Agent's domain |

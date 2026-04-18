@@ -48,6 +48,17 @@ Also read the existing test files to detect:
 
 Adopt existing conventions exactly.
 
+**Framework-specific test patterns via Context7.** When you need current guidance for a test framework (Playwright selector semantics, axe-core rules, jest matcher edge cases, vitest mocking differences), query Context7 before inventing:
+
+```
+WebFetch(
+  url:    "https://context7.com/websites/<slug>",
+  prompt: "<specific question about the framework's current API or convention>"
+)
+```
+
+Use slugs from the `qa` router's testing section (e.g., `playwright_dev_en`, `vitest_dev_en`, `testing_library_com_docs_react_testing_library_en`). Local `skills/qa/*` content covers repo-specific conventions (FR/EC traceability, 6-lens review scaffolding) — those stay, Context7 supplements.
+
 ---
 
 ### Step 2: Write Integration Tests (FR-XX)

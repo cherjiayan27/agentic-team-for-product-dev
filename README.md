@@ -86,19 +86,27 @@ git pull
 
 ## Usage
 
-### Start a session with a specific agent
+### Auto-delegation (recommended)
 
-```bash
-claude --agent pm-agent
-```
-
-### Or let Claude delegate automatically
-
-In a normal Claude Code session, describe a task that matches an agent's description. Claude delegates to the right agent automatically.
+In a normal Claude Code session, describe a task that matches an agent's description. Claude delegates to the right agent automatically via the Task tool.
 
 ```
-"I want to validate a new feature idea"  →  PM Agent picks it up
+"I want to validate a new feature idea"   →  PM Agent picks it up
+"Write the FRD for US-01"                 →  Feature Manager picks it up
+"Create tickets for the approved FRD"     →  Ticket Writer picks it up
+"Implement the backend for US-01-BE"      →  Backend Dev picks it up
 ```
+
+### Explicit invocation
+
+Name the agent at the start of your message when you want a specific one:
+
+```
+"Use pm-agent to validate this new feature idea"
+"Ask feature-manager to draft the FRD for US-01"
+```
+
+Agents are matched by the `description` field in their frontmatter, so clear, specific descriptions are what makes delegation work.
 
 ---
 

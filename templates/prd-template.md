@@ -49,12 +49,12 @@
 
 #### Sprint Board
 
-| Ticket | Feature | Agent | Status | Started | Target |
-|--------|---------|-------|--------|---------|--------|
-| [TICKET-001] | Feature A (BE) | Backend Dev | Complete | [date] | [date] |
-| [TICKET-002] | Feature A (FE) | Frontend Dev | In Progress | [date] | [date] |
-| [TICKET-003] | Feature A | QA Agent | Waiting | — | [date] |
-| [TICKET-004] | Feature B (BE) | Backend Dev | In Progress | [date] | [date] |
+| Ticket | Feature | Agent | Status | Started | Target | UAT Date | Prod Date | Notes |
+|--------|---------|-------|--------|---------|--------|----------|-----------|-------|
+| [TICKET-001] | Feature A (BE) | Backend Dev | Complete | [date] | [date] | — | — | |
+| [TICKET-002] | Feature A (FE) | Frontend Dev | In Progress | [date] | [date] | — | — | |
+| [TICKET-003] | Feature A | QA Agent | Waiting | — | [date] | — | — | |
+| [TICKET-004] | Feature B (BE) | Backend Dev | In Progress | [date] | [date] | — | — | |
 
 ---
 
@@ -72,9 +72,9 @@
 
 #### Sprint Board
 
-| Ticket | Feature | Agent | Status | Started | Target |
-|--------|---------|-------|--------|---------|--------|
-| — | — | — | Phase not started | — | — |
+| Ticket | Feature | Agent | Status | Started | Target | UAT Date | Prod Date | Notes |
+|--------|---------|-------|--------|---------|--------|----------|-----------|-------|
+| — | — | — | Phase not started | — | — | — | — | |
 
 ---
 
@@ -82,11 +82,11 @@
 
 | ID | Story | Phase | Priority | FRD Status |
 |----|-------|-------|----------|------------|
-| US-01 | Given [precondition], When [action], Then [outcome] | Phase 1 | Must | Approved |
-| US-02 | Given [precondition], When [action], Then [outcome] | Phase 1 | Must | In Review |
-| US-03 | Given [precondition], When [action], Then [outcome] | Phase 1 | Should | Draft |
-| US-04 | Given [precondition], When [action], Then [outcome] | Phase 2 | Must | Not Started |
-| US-05 | Given [precondition], When [action], Then [outcome] | Phase 2 | Should | Not Started |
+| US-01 | As a [user], I want [action], so that [benefit]. | Phase 1 | Must | Approved |
+| US-02 | As a [user], I want [action], so that [benefit]. | Phase 1 | Must | In Review |
+| US-03 | As a [user], I want [action], so that [benefit]. | Phase 1 | Should | Draft |
+| US-04 | As a [user], I want [action], so that [benefit]. | Phase 2 | Must | Not Started |
+| US-05 | As a [user], I want [action], so that [benefit]. | Phase 2 | Should | Not Started |
 
 ---
 

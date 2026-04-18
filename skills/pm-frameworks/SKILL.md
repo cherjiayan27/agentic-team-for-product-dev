@@ -1,6 +1,6 @@
 ---
 name: pm-frameworks
-description: Product management frameworks for prioritization, discovery, metrics, and strategy. Use when evaluating features, choosing success metrics, scoping work, or analyzing competition. Includes RICE, JTBD, MoSCoW, Kano, HEART, ICE, North Star Metric, Opportunity Solution Tree, Competitive Teardown, and OKR Cascade.
+description: Product management frameworks for prioritization, discovery, metrics, and strategy. Use when evaluating features, choosing success metrics, scoping work, or analyzing competition. Includes RICE, JTBD, MoSCoW, Kano, HEART, ICE, North Star Metric, Opportunity Solution Tree, Competitive Teardown, OKR Cascade, INVEST, B=MAP, First Principles, and 30 UX Laws.
 user-invocable: false
 ---
 
@@ -22,6 +22,10 @@ Optional frameworks that enhance the base product development workflow. These ar
 | Discovery — mapping outcomes to experiments | **Opportunity Solution Tree** | [references/opportunity-solution-tree.md](references/opportunity-solution-tree.md) |
 | Entering competitive markets, positioning | **Competitive Teardown** | [references/competitive-teardown.md](references/competitive-teardown.md) |
 | Quarterly planning, aligning teams to strategy | **OKR Cascade** | [references/okr-cascade.md](references/okr-cascade.md) |
+| Validating user stories before Feature Manager handoff | **INVEST** | [references/invest.md](references/invest.md) |
+| Analyzing why users do or don't take action | **B=MAP** | [references/b-map.md](references/b-map.md) |
+| Deconstructing problems to atomic truths, stress-testing assumptions | **First Principles** | [references/first-principles.md](references/first-principles.md) |
+| Evaluating UX decisions, NFRs, onboarding flows, cognitive load | **UX Laws** | [references/ux-laws.md](references/ux-laws.md) |
 
 ## How to Use
 

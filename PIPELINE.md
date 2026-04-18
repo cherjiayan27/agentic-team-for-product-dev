@@ -19,13 +19,13 @@ User idea
 │                                                      │
 │  Job 1: PRD Author (product-level)                   │
 │    → Creates and maintains the PRD                   │
-│    → Problem validation (5 forcing questions)        │
-│    → Surface assumptions + "Should this exist?" gate │
-│    → First principles filter (3 truth tests)         │
-│    → Strategic alignment (job, scope, metrics)       │
+│    → Problem validation (6 questions incl. market     │
+│       signal)                                        │
+│    → Surface load-bearing assumptions                │
+│    → Strategic alignment (jobs, metrics, hypothesis) │
 │    → 2-3 solution approaches (speed/impact/simplify) │
-│    → Product roadmap (phases, timelines, features)   │
-│    → User stories (Given-When-Then, MoSCoW, INVEST)  │
+│    → Product roadmap (phases, sprints, features)     │
+│    → User stories ("As a [user]..." + INVEST)        │
 │    → Updates PRD throughout lifecycle                 │
 │      (status changes, metrics, learnings, scope)     │
 │    → Output: PRD with user stories                   │
@@ -43,33 +43,39 @@ User idea
 ┌──────────────────────────────────────────────────────┐
 │  2. FEATURE MANAGER                                  │
 │                                                      │
-│  Writes one FRD per User Story (US-XX):              │
+│  Writes one combined spec per User Story (US-XX):    │
 │  Template: templates/frd-template.md                 │
 │                                                      │
-│    Functional Requirements (FR-XX)                   │
-│      → "The system shall..." language                │
-│      → Each FR traces to its parent US-XX            │
-│      → MoSCoW priority per FR                        │
-│                                                      │
-│    Non-Functional Requirements (NFR-XX)              │
-│      → Performance, security, accessibility          │
-│      → Scoped to this user story                     │
-│                                                      │
-│    Edge Cases (EC-XX)                                │
-│      → Boundary conditions                           │
-│      → Each EC traces to an FR-XX                    │
-│      → At least one EC per Must-have FR              │
-│                                                      │
-│    Codebase Feasibility                              │
+│    Section 1: Codebase Feasibility                   │
 │      → Reuse (existing modules/patterns)             │
 │      → New work (entities, endpoints, services)      │
-│      → Risks (architectural conflicts)               │
+│      → Conflicts / risks (3 bullets max each)        │
 │                                                      │
-│    Decisions Log                                     │
+│    Section 2: Behavioral Spec (Phase 2)              │
+│      → Functional Requirements (FR-XX)               │
+│        "The system shall..." — traces to US-XX       │
+│        MoSCoW priority per FR                        │
+│      → Non-Functional Requirements (NFR-XX)          │
+│        Performance, security, accessibility          │
+│        Scoped to this story only                     │
+│      → Edge Cases (EC-XX)                            │
+│        Boundary conditions — traces to FR-XX         │
+│        At least one EC per Must-have FR              │
+│                                                      │
+│    Section 3: Light Design Doc (Phase 3)             │
+│      → API endpoints (method, path, purpose)         │
+│      → Request / response shapes (field + type only) │
+│      → Data model changes (table/field/type)         │
+│      → Integration points                            │
+│                                                      │
+│    Section 4: Decisions Log                          │
 │      → Decision, choice, alternatives, rationale     │
 │                                                      │
-│  Output: FRD per US-XX                               │
-│  Hands back: FRD to PM Agent for review              │
+│  HARD GATE: Design Doc only after behavioral spec    │
+│  is approved by PM Agent.                            │
+│                                                      │
+│  Output: combined spec per US-XX                     │
+│  Hands back: to PM Agent for review                  │
 └──────────────────────────────────────────────────────┘
     │
     ▼
@@ -96,28 +102,31 @@ User idea
 ┌──────────────────────────────────────────────────────┐
 │  4. TICKET WRITER                                    │
 │                                                      │
-│  Per approved US-XX, creates tickets:                │
+│  Detects platform (GitHub/Linear/Jira) and           │
+│  project type (fullstack/BE-only/FE-only/CLI)        │
+│  from codebase, then per approved US-XX:             │
 │                                                      │
-│    Parent Issue                                      │
-│      → User Story from US-XX                         │
-│      → Context, impact, acceptance criteria          │
-│      → Acceptance Criteria                           │
-│        = Must-have FRs from this story               │
+│    Parent Issue (via CLI)                            │
+│      → User story + why it matters                   │
+│      → Acceptance criteria = Must-have FRs           │
+│      → Task list linking sub-issues                  │
 │                                                      │
-│    Backend Sub-Issue (engineering format)             │
-│      → Steps from FR-XX that touch API/DB            │
-│      → Testing requirements from EC-XX               │
+│    Backend Sub-Issue                                 │
+│      → FR-XX scoped to API/service/data layer        │
+│      → EC-XX edge cases for backend                  │
+│      → Design doc: endpoints + data model            │
 │      → Blocks Frontend                               │
 │                                                      │
-│    Frontend Sub-Issue (engineering format)            │
-│      → Steps from FR-XX that touch UI                │
-│      → E2E testing from EC-XX                        │
+│    Frontend Sub-Issue                                │
+│      → FR-XX scoped to UI/state/API client           │
+│      → EC-XX edge cases for frontend                 │
+│      → Design doc: endpoints to integrate            │
 │      → Blocked by Backend                            │
 │                                                      │
-│  Output: tickets ready for development               │
+│  Single ticket for BE-only / FE-only / CLI           │
+│  Updates PRD sprint board with ticket IDs            │
 │                                                      │
-│  Adapts to project's ticket platform:                │
-│  Linear, Jira, GitHub Issues, etc.                   │
+│  Template: templates/ticket-template.md              │
 └──────────────────────────────────────────────────────┘
     │
     ▼
@@ -222,12 +231,12 @@ User idea
 | # | Agent | Role | Core Expertise (product-agnostic) |
 |---|---|---|---|
 | 1 | **PM Agent** | PRD owner. Creates and maintains the PRD (problem, strategy, metrics, roadmap, user stories). Reviews FRDs written by Feature Manager. Updates PRD throughout lifecycle. | PRD authoring, problem validation, strategic alignment, user story writing, FRD review, first-principles rigor, anti-sycophancy |
-| 2 | **Feature Manager** | Solutions architect. Writes one FRD per user story (FR/NFR/EC). Explores codebase for feasibility. | SDD spec formalism (FR/NFR/EC), system architecture, API design, data modeling, codebase analysis |
-| 3 | **Ticket Writer** | Ticket factory. Decomposes approved spec into tickets on any platform (Linear, Jira, GitHub Issues, etc.) with proper format and blocking relationships. | Ticket decomposition, acceptance criteria mapping, sub-issue structure, blocking relationships |
-| 4 | **Backend Dev** | Backend engineer. Implements APIs, services, data models, migrations, and unit tests in whatever backend stack the project uses. | Backend architecture, API design, database operations, unit testing, migrations — framework detected from codebase |
-| 5 | **Frontend Dev** | Frontend engineer. Implements UI components, state management, API integration, and E2E tests in whatever frontend stack the project uses. | Component architecture, state management, responsive design, E2E testing — framework detected from codebase |
-| 6 | **QA Agent** | Quality gatekeeper. Writes integration + E2E tests from the spec (FR/NFR/EC per user story). Reviews code from 6 specialist perspectives. Sends back to dev if tests fail or issues found. | Integration testing, E2E testing, code quality, security review, performance review, conventions, FR/EC traceability |
-| 7 | **Ship Agent** | Deployment owner. Pushes code, creates PRs, manages CI, merges, verifies production, cleans up branches. | Git workflow, PR creation, CI/CD, post-deploy verification, branch cleanup |
+| 2 | **Feature Manager** | Solutions architect. Per US-XX: reads codebase for feasibility, writes behavioral spec (FR/NFR/EC), writes light design doc (API shapes, data model, integration points). Combined doc handed to PM for review. | SDD spec formalism (FR/NFR/EC), system architecture, API design, data modeling, codebase analysis |
+| 3 | **Ticket Writer** | Ticket factory. Detects platform and project type, creates parent + sub-issues via CLI per US-XX, updates PRD sprint board with ticket IDs. | Platform detection, ticket decomposition, acceptance criteria mapping, sub-issue structure, blocking relationships |
+| 4 | **Backend Dev** | Backend engineer. Reads backend sub-issue, detects stack and conventions from codebase, implements data models → migrations → services → API endpoints → unit tests. Signals completion with passing tests before Frontend starts. | Stack detection, convention adoption, data modeling, migrations, service layer, API handlers, FR/EC-traced unit tests |
+| 5 | **Frontend Dev** | Frontend engineer. Reads frontend sub-issue after backend is done, detects stack and conventions from codebase, implements API client → state → components → route integration → unit tests. Mobile-first responsive. | Stack detection, component architecture, state management, API integration, FR/EC-traced unit tests, responsive design |
+| 6 | **QA Agent** | Quality gatekeeper. Reads FRD to write integration (FR-XX), edge case (EC-XX), NFR constraint, and E2E tests. Reviews code across 6 lenses. Critical/High findings block handoff. Sends back to dev until gate passes. | Spec-driven testing, integration tests, E2E tests, code quality, security, performance, conventions, FR/EC traceability |
+| 7 | **Ship Agent** | Deployment owner. Pushes branch, creates structured draft PR, marks ready for CI, squash merges on green, runs canary checks post-deploy, reverts on critical failure, prunes branches. | Git workflow, PR creation, CI monitoring, squash merge, deploy platform detection, canary checks, revert, branch cleanup |
 
 ---
 
@@ -239,12 +248,13 @@ Each handover between agents follows a strict contract.
 
 The PM Agent delivers the **PRD** containing user stories. For each US-XX in the current phase, the Feature Manager writes an **FRD** using `templates/frd-template.md`.
 
-The Feature Manager receives the user story and writes:
-- Functional Requirements (FR-XX)
-- Non-Functional Requirements (NFR-XX)
-- Edge Cases (EC-XX)
-- Codebase Feasibility
-- Decisions Log
+The Feature Manager receives the user story and writes a combined spec:
+- Section 1: Codebase Feasibility (reuse, new work, conflicts — 3 bullets max each)
+- Section 2: Behavioral Spec — Functional Requirements (FR-XX), Non-Functional Requirements (NFR-XX), Edge Cases (EC-XX)
+- Section 3: Light Design Doc — API endpoints, request/response shapes, data model changes, integration points
+- Section 4: Decisions Log
+
+HARD GATE: Design Doc section only after behavioral spec is approved by PM Agent.
 
 ### Feature Manager → PM Agent (FRD Review)
 
@@ -264,11 +274,13 @@ After approval: PM Agent updates the PRD (FRD status, links).
 
 The PM Agent delivers the **approved FRD** for a user story.
 
-The Ticket Writer detects the project's ticket platform and creates:
-- One parent issue per US-XX (user story + context + acceptance criteria from FRD)
-- Backend sub-issue with FR-XX steps and EC-XX test cases
-- Frontend sub-issue with FR-XX steps and EC-XX test cases
-- Backend blocks Frontend
+The Ticket Writer detects the project's ticket platform (GitHub Issues, Linear, Jira) and project type (fullstack, backend-only, frontend-only, CLI), then creates via CLI:
+- One parent issue per US-XX (user story + why it matters + Must-have FRs as acceptance criteria)
+- Backend sub-issue: FR-XX scoped to API/service/data layer, EC-XX edge cases, design doc reference — blocks Frontend
+- Frontend sub-issue: FR-XX scoped to UI/state/API client, EC-XX edge cases, design doc endpoints — blocked by Backend
+- Single ticket for backend-only, frontend-only, or CLI projects
+
+After creation: updates PRD sprint board with ticket IDs.
 
 ### Ticket Writer → Backend Dev → Frontend Dev
 
@@ -325,7 +337,7 @@ Contains: overarching problem statement, strategic alignment, success metrics (w
 **Lives at:** `docs/frd/[US-XX]-[feature-name].md`
 **Updated:** Until approved, then frozen (changes require new FRD version)
 
-Contains: reference to parent PRD + US-XX, functional requirements (FR-XX), non-functional requirements (NFR-XX), edge cases (EC-XX), codebase feasibility, decisions log, approval status.
+Contains: reference to parent PRD + US-XX, codebase feasibility, functional requirements (FR-XX), non-functional requirements (NFR-XX), edge cases (EC-XX), light design doc (API shapes, data model, integration points), decisions log, approval status.
 
 ### How They Relate
 
@@ -346,8 +358,8 @@ PRD (one per product)
 | Type | What It Tests | Speed | Cost | Who Writes It |
 |---|---|---|---|---|
 | **Unit Tests** | A single function/method in isolation (mocks everything else) | Fast | Cheap | Backend Dev / Frontend Dev |
-| **Integration Tests** | Multiple components working together (e.g., service + database, API + auth) | Medium | Medium | Backend Dev / Frontend Dev |
-| **E2E Tests** | The full user flow through the real system (browser → UI → API → DB → response) | Slow | Expensive | Frontend Dev (typically) |
+| **Integration Tests** | Multiple components working together (e.g., service + database, API + auth) | Medium | Medium | QA Agent |
+| **E2E Tests** | The full user flow through the real system (browser → UI → API → DB → response) | Slow | Expensive | QA Agent |
 
 ### The Testing Pyramid
 
@@ -442,10 +454,13 @@ Skills are reusable knowledge packages that agents preload.
 
 | Skill | Type | Used By | Purpose |
 |---|---|---|---|
-| **pm-frameworks** | Agent-only (preloaded) | PM Agent | Optional PM frameworks (RICE, JTBD, MoSCoW, Kano, HEART, ICE, North Star, OST, Competitive Teardown, OKR) — applied only when they sharpen the output |
-| **pm-domain-knowledge** | Agent-only (preloaded) | PM Agent | Deep domain knowledge applied contextually across all steps — B=MAP (behavioral science), first-principles thinking, and more as added |
-
-Domain knowledge is **not step-specific** — the PM agent pulls in references whenever the conversation context matches, across any of the 4 BASE steps.
+| **pm-frameworks** | Agent-only (preloaded) | PM Agent | PM frameworks applied only when they sharpen the output — RICE, JTBD, MoSCoW, Kano, HEART, ICE, North Star, OST, Competitive Teardown, OKR Cascade, INVEST, B=MAP, First Principles, 30 UX Laws |
+| **spec-writing** | Agent-only (preloaded) | Feature Manager | Spec writing references — FRD quality bar with worked example (Step 2), REST API design rules for light design docs (Step 3) |
+| **ticket-writing** | Agent-only (preloaded) | Ticket Writer | Ticket writing references — GWT acceptance criteria patterns for 10 feature types (auth, CRUD, search, file upload, payment, notifications, negative tests, performance, accessibility) |
+| **backend-engineering** | Agent-only (preloaded) | Backend Dev | Master routing skill — maps detected stack and task type to specific sub-skills (framework patterns, migrations, security, testing) |
+| **frontend-engineering** | Agent-only (preloaded) | Frontend Dev | Master routing skill — maps detected stack, state management, test framework, and task type to inline conventions and sub-skills (design, UX, code quality) |
+| **qa** | Agent-only (preloaded) | QA Agent | Master routing skill — maps detected test framework and code review lens to specific sub-skills (testing guides, E2E frameworks, review references) |
+| **github-flow** | Agent-only (preloaded) | Ship Agent | Git + GitHub workflow — branch, PR, CI, merge, and cleanup conventions |
 
 ---
 

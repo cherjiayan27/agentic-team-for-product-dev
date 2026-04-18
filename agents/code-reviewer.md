@@ -1,7 +1,7 @@
 ---
 name: code-reviewer
 description: Code review agent that reads the diff for a US-XX and reviews it across 6 specialist lenses — quality, security, performance, conventions, holistic, and FR/EC traceability. Critical and High findings block handoff; Medium and Low are flagged. Runs after qa-tester passes, before Ship Agent.
-tools: Read, Write, Edit, Glob, Grep, Bash
+tools: Read, Write, Edit, Glob, Grep, Bash, WebFetch
 model: sonnet
 color: magenta
 skills:

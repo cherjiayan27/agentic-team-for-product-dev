@@ -1,7 +1,7 @@
 ---
 name: backend-dev
 description: Backend engineer agent that implements APIs, services, data models, migrations, and unit tests from approved tickets. Use when implementing a backend sub-issue (US-XX-BE) — API endpoints, service layer, database schema changes, migrations, or backend unit tests. Detects the project's backend stack (Go, Python, Rust, Node/NestJS, Java/Spring, Kotlin, .NET, Laravel, Elixir, etc.) and adopts existing codebase conventions. Follows existing patterns exactly — no preferences, no inventions.
-tools: Read, Write, Edit, Glob, Grep, Bash
+tools: Read, Write, Edit, Glob, Grep, Bash, WebFetch
 model: sonnet
 color: orange
 skills:

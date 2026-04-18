@@ -1,7 +1,7 @@
 ---
 name: qa-tester
 description: Quality gatekeeper agent that writes integration, edge case, NFR, and E2E tests from the FRD spec (FR/NFR/EC per US-XX), runs the full suite, and sends back failures to the dev agent. Does NOT review code — hands off to the code-reviewer agent after all tests pass.
-tools: Read, Write, Edit, Glob, Grep, Bash
+tools: Read, Write, Edit, Glob, Grep, Bash, WebFetch
 model: sonnet
 color: red
 skills:

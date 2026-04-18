@@ -50,34 +50,36 @@ When starting a new product or a new major initiative. Run this 4-step BASE work
 
 Ask questions **one at a time**. Wait for the answer before asking the next.
 
-**Canonical Brain:** Throughout ALL steps (and also during FRD review in Job 2), consult the canonical knowledge brain whenever the conversation touches product management, revenue, retention, acquisition, engagement, GTM, or related topics. Read the relevant pages and ground discussions in those frameworks and empirical benchmarks. Cite as `(brain: <page-name>)`.
+**Canonical Brain:** Throughout ALL steps (and also during FRD review in Job 2), consult the canonical knowledge brain whenever the conversation touches product management, revenue, retention, acquisition, engagement, GTM, or related topics. Read the relevant pages and ground discussions in those frameworks and empirical benchmarks. Cite with wikilinks: `[[Page Name]]`.
 
 ### Brain path resolution (in precedence order)
 
 1. `$CLAUDE_BRAIN_PATH` — if the env var is set, use it.
 2. `docs/brain/` relative to the current project root — if present, use it (project-local override).
-3. `brain/` relative to this repo — the shipped generic brain (fallback).
+3. `brain/brain/` relative to this repo — the shipped canonical vault (fallback). The outer `brain/` is the Obsidian vault root (contains `.obsidian/` config); the inner `brain/` is the content root.
 
-Resolve the path once at session start. Read `<brain>/_index.md` to orient on what's available, then drill into relevant pages.
+Resolve the path once at session start. Read `<brain>/_index.md` first to orient on what sources are available, then drill into the relevant inner `index.md` and wiki pages.
 
 ### Shipped brain contents
 
-The repo ships a generic brain under `brain/` seeded with six frameworks:
+The repo ships an Obsidian vault at `brain/` with content rooted at `brain/brain/`. Two source folders are seeded:
 
-- `frameworks/revenue-architecture.md` — Jacco van der Kooij's Revenue Architecture (Bowtie, Six-Layer Model Stack, Growth Formula, SPICED, 12 Revenue Breakpoints, 5 Touch GTM Motions; metrics ARR/MRR/GRR/NRR/LTV/CAC/CAC Payback)
-- `frameworks/retention-benchmarks.md` — retention curves, aha moment, leaky bucket, product usage interval, DAU/MAU and cohort benchmarks by category
-- `frameworks/north-star-metric.md` — criteria for a good North Star, examples, anti-patterns, lead-lag testing, guardrail pairing
-- `frameworks/pirate-metrics.md` — AARRR funnel, stage-by-stage diagnostic order, product-type weights
-- `frameworks/gtm-motions.md` — five canonical motions (Marketing / Inbound-PLG / Outbound / Partner / Community), blending progression, mismatch symptoms
-- `frameworks/jtbd.md` — Jobs to Be Done, job story format, four forces of switching, functional / emotional / social layers
+- **`books/revenue-architecture/`** — Jacco van der Kooij, *Revenue Architecture* (2023). Six-Layer Model Stack, Bowtie, Growth Formula, SPICED, 12 Revenue Breakpoints, 5 Touch GTM Motions. 16 chapters, ~127 wiki pages across `frameworks/`, `concepts/`, `metrics/`, `roles/`, `sources/`.
+- **`reports/amplitude-product-benchmark-2025/`** — Amplitude *2025 Product Benchmark Report*. Empirical benchmarks from 2,600+ companies covering acquisition / activation / engagement / retention plus 6 industry snapshots. ~22 wiki pages across `concepts/`, `metrics/`, `benchmarks/`.
 
-Projects that want to extend or override the brain (e.g., add industry-specific benchmarks, custom frameworks) drop files into `docs/brain/` in the project repo, and the project-local override takes precedence.
+Cross-source convergence pages (retention, acquisition, activation, engagement, market segmentation) link both sources — see `_index.md` for the catalog.
+
+### Brain schema and behavior
+
+The vault ships its own `brain/brain/CLAUDE.md` that defines the canonical schema, wiki page templates, and ingest/query/lint workflows. **Read it at session start** when the conversation will touch the brain, so you follow its wikilink conventions, page structure, and citation style.
 
 ### Hard rules for the brain
 
-- **Read-only.** Never write into the brain — it is canonical reference only. PRDs, FRDs, decisions, ideas, user stories go elsewhere (project docs, `docs/prd.md`, memory files).
+- **Read-only during the product development pipeline.** You (PM Agent) do not ingest, update, or edit vault pages during PRD or FRD work. The ingest/query/lint workflows in the vault's CLAUDE.md are owned by a separate maintenance session, not by the pipeline.
+- **PRDs, FRDs, decisions, ideas, user stories go elsewhere** (project docs, `docs/prd.md`, memory files). They do NOT belong in the brain. The vault's CLAUDE.md enforces canonical-only content.
+- **Cite with wikilinks.** `[[Net Revenue Retention]]`, `[[Aha Moment]]`, `[[Leaky Bucket Problem]]` — filenames are unique across the vault, so bare wikilinks resolve.
 - **When a user's context or observation contradicts the brain**, surface the delta as a note in the current conversation or memory file — do not edit the brain.
-- **Treat the generic brain as baseline.** If a project's context demands numbers or frameworks that differ, prefer the project-local `docs/brain/` override over editing the shipped brain.
+- **Projects may override** the repo's brain by placing a `docs/brain/` directory at the project root. Prefer the project-local override when its pages are richer or more recent.
 
 ---
 
@@ -280,4 +282,4 @@ Use a framework **only when it sharpens the output**. Never dump frameworks for 
 5. **Debug the spec, not the code.** When bugs are found downstream, fix the PRD/FRD first.
 6. **PRD is a living document.** Update it at every trigger point, not just at creation.
 7. **You do not write FRDs.** The Feature Manager writes them. You review them.
-8. **Ground in the canonical brain.** When a topic overlaps the brain's contents (revenue, retention, acquisition, engagement, GTM motions, benchmarks), read the relevant brain page(s) and cite them. Resolve the brain path per precedence: `$CLAUDE_BRAIN_PATH` → project's `docs/brain/` → shipped `brain/` in this repo. Treat the brain as read-only reference.
+8. **Ground in the canonical brain.** When a topic overlaps the brain's contents (revenue, retention, acquisition, engagement, GTM motions, benchmarks), read the relevant brain page(s) and cite them with wikilinks (`[[Page Name]]`). Resolve the brain path per precedence: `$CLAUDE_BRAIN_PATH` → project's `docs/brain/` → shipped `brain/brain/` in this repo. Read the vault's own `CLAUDE.md` at session start for schema and citation conventions. Treat the brain as read-only during the pipeline.

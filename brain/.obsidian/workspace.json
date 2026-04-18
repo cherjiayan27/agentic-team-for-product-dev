@@ -1,0 +1,218 @@
+{
+  "main": {
+    "id": "086e5667fc1d9686",
+    "type": "split",
+    "children": [
+      {
+        "id": "e75c12cebcabf0b3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fb04e55874e8390a",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "282aeaa45f24292b",
+    "type": "split",
+    "children": [
+      {
+        "id": "4d26bb1f0b17f408",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "aad1853bc1f7e1cf",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "322cee19589fa3a3",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "6e9be8ac52213b78",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "a9b49e8db9695b39",
+    "type": "split",
+    "children": [
+      {
+        "id": "39ef0df3c77a74c5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "493b23b9cfa60eda",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "2a10b4ffa572953e",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "a33f51209ac448d0",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "3db18b261ec4eb40",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "2e0a5dd4b40bc55b",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "fb04e55874e8390a",
+  "lastOpenFiles": [
+    "brain/reports/amplitude-product-benchmark-2025/wiki/sources/08-methodology.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/sources/07-customer-experiences.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/benchmarks/Industry Benchmarks.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/sources/06-industry-snapshot.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/concepts/Product Usage Interval.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/benchmarks/Engagement Benchmarks.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/metrics/Engagement Rate.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/sources/04-engagement.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/concepts/Aha Moment.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/concepts/North Star Metric.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/benchmarks/Activation Benchmarks.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/metrics/Activation Rate.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/sources/03-activation.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/benchmarks/Acquisition Growth Rate Benchmarks.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/sources/02-acquisition.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/concepts/Leaky Bucket Problem.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/sources/01-how-top-products-grow.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/benchmarks/Enterprise Retention Benchmarks.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/benchmarks/Retention Benchmarks (All Products).md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/concepts/Retention Cohort Analysis.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/concepts/User Retention.md",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/sources/05-retention.md",
+    "brain/reports/amplitude-product-benchmark-2025/raw/markdown/08-methodology.md",
+    "brain/reports/amplitude-product-benchmark-2025/raw/markdown/07-customer-experiences.md",
+    "brain/reports/amplitude-product-benchmark-2025/raw/markdown/06-industry-snapshot.md",
+    "brain/reports/amplitude-product-benchmark-2025/raw/markdown/05-retention.md",
+    "brain/reports/amplitude-product-benchmark-2025/raw/pdf-chapters/08-methodology.pdf",
+    "brain/reports/amplitude-product-benchmark-2025/raw/pdf-chapters/07-customer-experiences.pdf",
+    "brain/reports/amplitude-product-benchmark-2025/raw/pdf-chapters/06-industry-snapshot.pdf",
+    "brain/reports/amplitude-product-benchmark-2025/raw/pdf-chapters/05-retention.pdf",
+    "brain/reports/amplitude-product-benchmark-2025/raw/pdf-chapters/04-engagement.pdf",
+    "brain/reports/amplitude-product-benchmark-2025/raw/pdf-chapters/03-activation.pdf",
+    "brain/reports/amplitude-product-benchmark-2025/raw/pdf-chapters/02-acquisition.pdf",
+    "brain/reports/amplitude-product-benchmark-2025/raw/pdf-chapters/01-how-top-products-grow.pdf",
+    "brain/reports/amplitude-product-benchmark-2025/raw/pdf/amplitude-product-benchmark-2025.pdf",
+    "brain/reports/amplitude-product-benchmark-2025/wiki/sources"
+  ]
+}

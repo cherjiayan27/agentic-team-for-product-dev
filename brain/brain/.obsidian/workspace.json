@@ -1,0 +1,218 @@
+{
+  "main": {
+    "id": "086e5667fc1d9686",
+    "type": "split",
+    "children": [
+      {
+        "id": "e75c12cebcabf0b3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fb04e55874e8390a",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "282aeaa45f24292b",
+    "type": "split",
+    "children": [
+      {
+        "id": "4d26bb1f0b17f408",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "aad1853bc1f7e1cf",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "322cee19589fa3a3",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "6e9be8ac52213b78",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "a9b49e8db9695b39",
+    "type": "split",
+    "children": [
+      {
+        "id": "39ef0df3c77a74c5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "493b23b9cfa60eda",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "2a10b4ffa572953e",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "a33f51209ac448d0",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "3db18b261ec4eb40",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "2e0a5dd4b40bc55b",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "fb04e55874e8390a",
+  "lastOpenFiles": [
+    "revenue-architecture-brain/wiki/frameworks/SPICED.md",
+    "brain/books/revenue-architecture/wiki/sources/15-bibliography.md",
+    "brain/books/revenue-architecture/wiki/sources/14-abbreviations.md",
+    "brain/books/revenue-architecture/wiki/sources/13-annex.md",
+    "brain/books/revenue-architecture/wiki/sources/12-epilogue.md",
+    "brain/books/revenue-architecture/wiki/sources/11-simply-deploy.md",
+    "brain/books/revenue-architecture/wiki/sources/10-go-to-market-model.md",
+    "brain/books/revenue-architecture/wiki/sources/09-growth-model.md",
+    "brain/books/revenue-architecture/wiki/sources/08-operating-model.md",
+    "brain/books/revenue-architecture/wiki/sources/07-mathematical-model.md",
+    "brain/books/revenue-architecture/wiki/sources/06-data-model.md",
+    "brain/books/revenue-architecture/wiki/sources/05-revenue-model.md",
+    "brain/books/revenue-architecture/wiki/sources/04-systems-and-processes.md",
+    "brain/books/revenue-architecture/wiki/sources/03-models-and-data.md",
+    "brain/books/revenue-architecture/wiki/sources/02-first-principles.md",
+    "brain/books/revenue-architecture/wiki/sources/01-introduction.md",
+    "brain/books/revenue-architecture/wiki/sources/00-prologue.md",
+    "brain/books/revenue-architecture/wiki/roles/Sales Development Representative.md",
+    "brain/books/revenue-architecture/wiki/roles/Decider.md",
+    "brain/books/revenue-architecture/wiki/roles/Customer Success Manager.md",
+    "brain/books/revenue-architecture/wiki/roles/Chief Revenue Officer.md",
+    "brain/books/revenue-architecture/wiki/roles/Account Manager.md",
+    "brain/books/revenue-architecture/wiki/roles/Account Executive.md",
+    "brain/books/revenue-architecture/wiki/metrics/Win Rate.md",
+    "brain/books/revenue-architecture/wiki/metrics/Rule of 40.md",
+    "brain/books/revenue-architecture/wiki/metrics/Net Revenue Retention.md",
+    "brain/books/revenue-architecture/raw/pdf-chapters/15-bibliography.pdf",
+    "brain/books/revenue-architecture/raw/pdf-chapters/14-abbreviations.pdf",
+    "brain/books/revenue-architecture/raw/pdf-chapters/13-annex.pdf",
+    "brain/books/revenue-architecture/raw/pdf-chapters/12-epilogue.pdf",
+    "brain/books/revenue-architecture/raw/pdf-chapters/11-simply-deploy.pdf",
+    "brain/books/revenue-architecture/raw/pdf-chapters/10-go-to-market-model.pdf",
+    "brain/books/revenue-architecture/raw/pdf-chapters/09-growth-model.pdf",
+    "brain/books/revenue-architecture/raw/pdf-chapters/08-operating-model.pdf",
+    "brain/books/revenue-architecture/raw/pdf-chapters/07-mathematical-model.pdf",
+    "brain/books/revenue-architecture/raw/pdf-chapters/06-data-model.pdf"
+  ]
+}

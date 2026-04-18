@@ -117,7 +117,22 @@ Agents are matched by the `description` field in their frontmatter, so clear, sp
 ```
 agentic-team-for-product-dev/
   PIPELINE.md                              # Full pipeline documentation
-  README.md                               # This file
+  README.md                                # This file
+  brain/                                   # Canonical PM knowledge — Obsidian vault
+    .obsidian/                             # Vault config (openable in Obsidian app)
+    brain/                                 # Content root
+      _index.md                            # Cross-source catalog
+      _log.md                              # Macro activity log
+      CLAUDE.md                            # Vault schema, page templates, workflows
+      Memory.md                            # Vault description
+      books/
+        revenue-architecture/              # Jacco van der Kooij, Revenue Architecture
+          raw/                             # Immutable source PDFs + markdown
+          wiki/                            # AI-generated pages (frameworks, concepts, metrics, roles, sources)
+      reports/
+        amplitude-product-benchmark-2025/  # Amplitude 2025 Product Benchmark Report
+          raw/
+          wiki/                            # Pages (concepts, metrics, benchmarks, sources)
   agents/
     pm-agent.md                            # PM agent (first-principles, 5-phase workflow)
     feature-manager.md                     # Feature Manager (feasibility + behavioral spec + design doc)
@@ -175,7 +190,13 @@ agentic-team-for-product-dev/
 
 ## Product-Agnostic
 
-All agents are product-agnostic. They detect the project's stack, conventions, and ticket platform from the codebase. Technology-specific knowledge lives in the project's own skills, not in agent definitions. The same agents work for any product — Go, Python, TypeScript, Swift, etc.
+All 8 agents are product-agnostic. They detect the project's stack, conventions, and ticket platform from the codebase. Technology-specific knowledge lives in the project's own skills, not in agent definitions. The same agents work for any product — Go, Python, TypeScript, Swift, etc.
+
+## Brain
+
+The repo ships an Obsidian vault at `brain/` used by the PM Agent as a canonical knowledge base — frameworks, benchmarks, and concepts grounded in validated external sources (books, industry reports). Read-only during the pipeline. See `brain/brain/CLAUDE.md` for the vault's schema, page templates, and ingest / query / lint workflows.
+
+Projects can override by dropping their own `docs/brain/` at the project root (takes precedence).
 
 ---
 

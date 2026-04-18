@@ -467,7 +467,7 @@ ln -s /path/to/agentic-team-for-product-dev/agents ~/.claude/agents
 
 ### Across multiple products
 
-All 7 agents are **product-agnostic**. They are experts at their role, not at a specific technology. When dropped into a project, they:
+All 8 agents are **product-agnostic**. They are experts at their role, not at a specific technology. When dropped into a project, they:
 
 1. **Detect the stack** — read `package.json`, `go.mod`, `Cargo.toml`, `requirements.txt`, etc.
 2. **Detect conventions** — read existing code patterns, test structure, project config
